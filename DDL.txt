@@ -1,0 +1,44 @@
+CREATE TABLE hospital(
+	city TEXT NOT NULL,
+	id TEXT PRIMARY KEY
+)
+
+CREATE TABLE organ(
+	id INTEGER PRIMARY KEY,
+	type TEXT NOT NULL,
+	name ORGAN NOT NULL,
+	h_id REFERENCES hospital(id)
+)
+
+CREATE TABLE medical_history(
+	id INTEGER PRIMARY KEY,
+	blood_type BLOOD_TYPE NOT NULL,
+	previous_illnesses TEXT,
+	actual_illnesses TEXT,
+	date DATE NOT NULL
+)
+
+CREATE TABLE patient (
+	id INTEGER PRIMARY KEY,
+	name TEXT NOT NULL,
+	gender GENDER NOT NULL,
+	age INTEGER NOT NULL,
+	organ_id REFERENCES organ(id),
+	mh_id REFERENCES medical_history(id),
+	h_id REFERENCES hospital(id)
+)
+
+CREATE TABLE donor (
+	id INTEGER PRIMARY KEY,
+	name TEXT NOT NULL,
+	gender GENDER NOT NULL,
+	age INTEGER NOT NULL,
+	organ_id REFERENCES organ(id),
+	mh_id REFERENCES medical_history(id)
+)
+
+CREATE TABLE relationship(
+	patient_id INTEGER,
+	donor_id INTEGER,
+	PRIMARY KEY (patient_id,donor_id)
+)
