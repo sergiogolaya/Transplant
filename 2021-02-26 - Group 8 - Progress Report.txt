@@ -1,0 +1,17 @@
+This week we expected to be able to do...
+The E-R model, the sample use case diagram and the tables
+
+Optional: Reasons why
+It seemed like a good start so we can organise the whole project
+
+This week we did...
+The E-R model, the sample use case diagram and the tables
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+The tables in SQL.
+
+Optional: Reasons why
+---------------------
