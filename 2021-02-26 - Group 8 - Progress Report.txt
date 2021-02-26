@@ -5,13 +5,13 @@ Optional: Reasons why
 It seemed like a good start so we can organise the whole project
 
 This week we did...
-The E-R model, the use case diagram and the tables
+The E-R model, the DDL in SQL and the tables
 
 Optional: Reasons why
 ---------------------
 
 Next weeks we will do...
-The tables in SQL.
+The use case diagram
 
 Optional: Reasons why
 ---------------------
