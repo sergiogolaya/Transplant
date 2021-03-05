@@ -1,17 +1,21 @@
+CREATE TABLE request(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	macth BOOLEAN
+
 CREATE TABLE hospital(
 	city TEXT NOT NULL,
 	id TEXT PRIMARY KEY
 )
 
 CREATE TABLE organ(
-	id INTEGER PRIMARY KEY,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	type TEXT NOT NULL,
 	organ ENUM('heart','kidney','lung') NOT NULL,
 	h_id REFERENCES hospital(id)
 )
 
 CREATE TABLE medical_history(
-	id INTEGER PRIMARY KEY,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	blood_type BLOOD_TYPE NOT NULL,
 	previous_illnesses TEXT,
 	actual_illnesses TEXT,
@@ -19,7 +23,7 @@ CREATE TABLE medical_history(
 )
 
 CREATE TABLE patient (
-	id INTEGER PRIMARY KEY,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	name TEXT NOT NULL,
 	gender ENUM('male','female','non binary') NOT NULL,
 	age INTEGER NOT NULL,
@@ -29,7 +33,7 @@ CREATE TABLE patient (
 )
 
 CREATE TABLE donor (
-	id INTEGER PRIMARY KEY,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	name TEXT NOT NULL,
 	gender ENUM('male','female','non binary') NOT NULL,
 	age INTEGER NOT NULL,
