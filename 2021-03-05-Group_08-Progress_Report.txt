@@ -1,0 +1,17 @@
+This week we expected to be able to do...
+The PDF explaining the UML use case diagram and to start programing the DDL tables in eclipse
+
+Optional: Reasons why
+---------------------
+
+This week we did...
+The PDF explaining the UML use case diagram and to start programing the DDL tables in eclipse
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+the rest of the DDL tables in java and start with the UI
+
+Optional: Reasons why
+---------------------
