@@ -1,0 +1,17 @@
+This week we expected to be able to do...
+The inserts and tables in SQL (java)
+
+Optional: Reasons why
+---------------------
+
+This week we did...
+The inserts and tables in SQL (java) and started the powerpoint presentation
+
+Optional: Reasons why
+---------------------
+
+Next weeks we will do...
+finish the powerpoint presentation and start working on the menu and UI in java
+
+Optional: Reasons why
+---------------------
