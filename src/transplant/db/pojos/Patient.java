@@ -3,10 +3,10 @@ package transplant.db.pojos;
 import java.util.List;
 
 public class Patient {
-	private int id;
+	private Integer id;
 	private String name;
 	private String gender;
-	private int age;
+	private Integer age;
 	private List<Patient> patientlist;
 	
 	public void addPatient(Patient p) {
@@ -21,7 +21,7 @@ public class Patient {
 		}
 	}
 
-	public Patient(int id, String name, String gender, int age, List<Patient> patients) {
+	public Patient(Integer id, String name, String gender, int age, List<Patient> patients) {
 		super();
 		this.id = id;
 		this.name = name;

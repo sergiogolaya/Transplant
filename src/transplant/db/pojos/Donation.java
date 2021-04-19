@@ -1,9 +1,12 @@
 package transplant.db.pojos;
 
+import java.util.List;
+
 public class Donation {
 	private Integer id;
 	private String name;
 	private String type;
+	private List<Donation> donationlist;
 	
 	public Donation(Integer id, String name, String type) {
 		super();
@@ -43,13 +46,13 @@ public class Donation {
 	
 	
 	public void addDonation(Donation donation) {
-		if (!(donorlist).contains(donor)) {
-			donor.addDonor(donor);
+		if (!(donationlist).contains(donation)) {
+			donationlist.add(donation);
 		}
 	}
-	public void removeDonor(Donor donor) {
-		if(donorlist.contains(donor)) {
-			donorlist.remove(donor);
+	public void removeDonation(Donation donation) {
+		if(donationlist.contains(donation)) {
+			donationlist.remove(donation);
 		}
 	}
 
