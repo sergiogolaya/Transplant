@@ -4,6 +4,17 @@ import java.util.List;
 
 public class Donor {
 
+	public Donor(String name, String gender, int age, int organ_id, int mh_id, String h_id, int id) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.age = age;
+		this.organ_id = organ_id;
+		this.mh_id = mh_id;
+		this.h_id = h_id;
+		this.id = id;
+	}
+
 	private String name;
 	private String gender;
 	private int age;

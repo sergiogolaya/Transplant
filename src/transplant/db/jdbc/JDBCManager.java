@@ -6,12 +6,16 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import transplant.db.ifaces.DBManager;
-import transplant.db.pojos.*;
+import transplant.db.pojos.Donor;
+
 
 public class JDBCManager implements DBManager {
     
@@ -289,6 +293,33 @@ catch (Exception e) {
 }
 }
 			
+public List<Donor> searchDonorById(int id) {
+	List<Donor> donorList = new ArrayList<Donor>();
+	try {
+		String sql = "SELECT * FROM Donor WHERE id = ?";
+		PreparedStatement stmt = c.prepareStatement(sql);
+		stmt.setInt(1,id);
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) { // true: there is another result and I have advanced to it
+							// false: there are no more results
+			String name=rs.getString("name");
+			String gender=rs.getString("gender");
+			int age=rs.getInt("age");
+			int organ_ID=rs.getInt("organ_ID");
+			int MH_ID=rs.getInt("MH_ID");
+			String h_id=rs.getString("h_id");
+			int idDonor=rs.getInt("id");
+			Donor donor1= new Donor(name,gender,age,organ_ID,MH_ID,h_id,idDonor);
+			donorList.add(donor1);
+		}
+		rs.close();
+		stmt.close();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return donorList;
+}
+
 			
 			
 	
