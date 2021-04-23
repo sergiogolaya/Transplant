@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import transplant.db.ifaces.DBManager;
-import transplant.db.pojos.*;
+import transplant.db.pojos.Donor;
+
 
 public class JDBCManager implements DBManager {
 
@@ -217,6 +218,7 @@ public class JDBCManager implements DBManager {
 		}
 	}
 
+<<<<<<< HEAD
 	public void addMedicalHospital() {
 		try {
 
@@ -287,6 +289,67 @@ public class JDBCManager implements DBManager {
 		}
 		return patients;
 	}
+=======
+	
+	System.out.println("Please, input the MedicalHistory info:");
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	System.out.print("Id: ");
+	String id = reader.readLine();
+	System.out.print("Blood type: ");
+	String bloodtype = reader.readLine();
+	System.out.print("Previous illnesses: ");
+	String previous_illnesses= reader.readLine();
+	System.out.print("Actual illnesses: ");
+	String actual_illnesses= reader.readLine();
+	System.out.print("Date: ");
+	LocalDate date= reader.read();
+	
+	Statement stmt=c.createStatement();
+	String sql = "INSERT INTO MH (id, blootype,p_illnesses,a_illnesses,date) "
+			+ "VALUES ('" + id + "', '" + bloodtype+ "', '" + previous_illnesses + "', '" +
+			actual_illnesses +"', '" + date
+				+ "');";
+	stmt.executeUpdate(sql);
+	stmt.close();
+	System.out.println("Medical history info processed");
+	System.out.println("Records inserted.");
+}
+catch (Exception e) {
+	e.printStackTrace();
+}
+}
+			
+public List<Donor> searchDonorById(int id) {
+	List<Donor> donorList = new ArrayList<Donor>();
+	try {
+		String sql = "SELECT * FROM Donor WHERE id = ?";
+		PreparedStatement stmt = c.prepareStatement(sql);
+		stmt.setInt(1,id);
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) { // true: there is another result and I have advanced to it
+							// false: there are no more results
+			String name=rs.getString("name");
+			String gender=rs.getString("gender");
+			int age=rs.getInt("age");
+			int organ_ID=rs.getInt("organ_ID");
+			int MH_ID=rs.getInt("MH_ID");
+			String h_id=rs.getString("h_id");
+			int idDonor=rs.getInt("id");
+			Donor donor1= new Donor(name,gender,age,organ_ID,MH_ID,h_id,idDonor);
+			donorList.add(donor1);
+		}
+		rs.close();
+		stmt.close();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	return donorList;
+}
+
+			
+			
+	
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant
 
 	@Override
 	public void disconnect() {
