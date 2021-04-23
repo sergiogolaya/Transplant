@@ -1,5 +1,6 @@
 package transplant.db.pojos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Patient {
@@ -10,11 +11,23 @@ public class Patient {
 	private Integer donation_id;
 	private Integer mh_id;
 	private Integer h_id;
-	private List<Patient> patientlist;
+	private List<Patient> patientlist;	
 	
 	
+	
+	public Patient(List<Patient> patientlist) {
+		super();
+		this.patientlist = new ArrayList<Patient>();
+	}
+
+	public Patient(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
 	public Patient(Integer id, String name, String gender, Integer age, Integer donation_id, Integer mh_id,
-			Integer h_id, List<Patient> patientlist) {
+			Integer h_id) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -23,14 +36,10 @@ public class Patient {
 		this.donation_id = donation_id;
 		this.mh_id = mh_id;
 		this.h_id = h_id;
-		this.patientlist = patientlist;
+		this.patientlist = new ArrayList<Patient>();
 	}
 
-	public void addPatient(Patient p) {
-		if(!(patientlist).contains(p)) {
-			patientlist.add(p);
-		}
-	}
+	
 	
 	public void removePatient(Patient p) {
 		if(patientlist.contains(p)) {
