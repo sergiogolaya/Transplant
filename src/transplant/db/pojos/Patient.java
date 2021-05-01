@@ -11,14 +11,6 @@ public class Patient {
 	private Integer donation_id;
 	private Integer mh_id;
 	private Integer h_id;
-	private List<Patient> patientlist;	
-	
-	
-	
-	public Patient(List<Patient> patientlist) {
-		super();
-		this.patientlist = new ArrayList<Patient>();
-	}
 
 	public Patient(Integer id, String name) {
 		super();
@@ -37,14 +29,6 @@ public class Patient {
 		this.mh_id = mh_id;
 		this.h_id = h_id;
 		this.patientlist = new ArrayList<Patient>();
-	}
-
-	
-	
-	public void removePatient(Patient p) {
-		if(patientlist.contains(p)) {
-			patientlist.remove(p);
-		}
 	}
 
 	public Integer getId() {

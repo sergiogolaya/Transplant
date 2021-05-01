@@ -22,7 +22,6 @@ public class Donor {
 	private int mh_id;
 	private String h_id;
 	private int id;
-	private List<Donor> donorlist;
 
 	public int getId() {
 		return id;
@@ -80,7 +79,7 @@ public class Donor {
 		this.h_id = h_id;
 	}
 
-	public void addDonor(Donor donor) {
+	/*public void addDonor(Donor donor) {
 		if (!(donorlist).contains(donor)) {
 			donor.addDonor(donor);
 		}
@@ -90,6 +89,6 @@ public class Donor {
 		if (donorlist.contains(donor)) {
 			donorlist.remove(donor);
 		}
-	}
+	}*/
 
 }

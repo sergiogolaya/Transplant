@@ -1,18 +1,45 @@
 package transplant.db.pojos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hospital {
 	private String idname;
 	private String city;
+	private List<Patient> patientlist;
+	private List<Donor> donorlist;
 	
 	
+	public Hospital(List<Patient> patientlist, List<Donor> donorlist) {
+		super();
+		this.patientlist = new ArrayList<Patient>();
+		this.donorlist = new ArrayList<Donor>();
+	}
 	public Hospital(String idname, String city) {
 		super();
 		this.idname = idname;
 		this.city = city;
+		this.patientlist = new ArrayList<Patient>();
+		this.donorlist = new ArrayList<Donor>();
 	}
 	public void addPatient(Patient p) {
 		if(!patientlist.contains(p)) {
 			patientlist.add(p);
+		}
+	}
+	public void removePatient(Patient p) {
+		if(patientlist.contains(p)) {
+			patientlist.remove(p);
+		}
+	}
+	public void addDonor(Donor d) {
+		if(!donorlist.contains(d)) {
+			donorlist.add(d);
+		}
+	}
+	public void removeDonor(Donor d) {
+		if(donorlist.contains(d)) {
+			donorlist.remove(d);
 		}
 	}
 	@Override
