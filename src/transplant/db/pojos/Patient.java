@@ -11,11 +11,21 @@ public class Patient {
 	private Integer donation_id;
 	private Integer mh_id;
 	private Integer h_id;
+	private List<Donor> donorlist;
+	private List<Donation> donationlist;
+
+	public Patient() {
+		super();
+		this.donorlist = new ArrayList<Donor>();
+		this.donationlist = new ArrayList<Donation>();
+	}
 
 	public Patient(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.donorlist = new ArrayList<Donor>();
+		this.donationlist = new ArrayList<Donation>();
 	}
 
 	public Patient(Integer id, String name, String gender, Integer age, Integer donation_id, Integer mh_id,
@@ -28,7 +38,8 @@ public class Patient {
 		this.donation_id = donation_id;
 		this.mh_id = mh_id;
 		this.h_id = h_id;
-		this.patientlist = new ArrayList<Patient>();
+		this.donorlist = new ArrayList<Donor>();
+		this.donationlist = new ArrayList<Donation>();
 	}
 
 	public Integer getId() {
@@ -87,18 +98,11 @@ public class Patient {
 		this.h_id = h_id;
 	}
 
-	public List<Patient> getPatientlist() {
-		return patientlist;
-	}
-
-	public void setPatientlist(List<Patient> patientlist) {
-		this.patientlist = patientlist;
-	}
-
 	@Override
 	public String toString() {
 		return "Patient [id=" + id + ", name=" + name + ", gender=" + gender + ", age=" + age + ", donation_id="
-				+ donation_id + ", mh_id=" + mh_id + ", h_id=" + h_id + ", patientlist=" + patientlist + "]";
+				+ donation_id + ", mh_id=" + mh_id + ", h_id=" + h_id + ", donorlist=" + donorlist + ", donationlist="
+				+ donationlist + "]";
 	}
 
 	@Override
