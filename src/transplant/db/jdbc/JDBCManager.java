@@ -3,18 +3,18 @@ package transplant.db.jdbc;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import transplant.db.ifaces.DBManager;
 import transplant.db.pojos.Donor;
+
+
 
 
 public class JDBCManager implements DBManager {
@@ -26,7 +26,7 @@ public class JDBCManager implements DBManager {
 		try {
 	        // Open database connection
 		    Class.forName("org.sqlite.JDBC");
-		    Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");
+		    c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");
 	        c.createStatement().execute("PRAGMA foreign_keys=ON");
 		    System.out.println("Database connection opened.");
             this.createTables();
@@ -43,80 +43,71 @@ public class JDBCManager implements DBManager {
 	
 	private void createTables() {
 		// If the tables are not created already, create them
-	    
-		Statement stm1;
 		try {
-            //Create the jobs table
-			stm1=c.createStatement();
+           
+			Statement stm1= c.createStatement();
 		
-		    String sql1="(CREATE TABLE patient"
+		    String sql1="CREATE TABLE patient( "
 				      + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				      + "name TEXT NOT NULL,"
-				      + "gender ENUM('MUJER', 'HOMBRE') NOT NULL,"
+				      + "gender TEXT NOT NULL,"
 				      + "age INTEGER NOT NULL,"
 				      + "organ_ID INTEGER NOT NULL,"
 				      + "MH_ID INTEGER NOT NULL,"
-				      + "H_ID INTEGER NOT NULL)";
+				      + "H_ID INTEGER NOT NULL)";		    
 		   stm1.executeUpdate(sql1);
-		   
-			
-		     sql1="(CREATE TABLE donor"
+		  
+		     sql1="CREATE TABLE donor( "
 				      + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				      + "name TEXT NOT NULL,"
-				      + "gender ENUM('MUJER','HOMBRE'),"
+				      + "gender TEXT NOT NULL,"
 				      + "age INTEGER NOT NULL,"
 				      + "organ_ID INTEGER NOT NULL,"
-				      + "MH_ID INTEGER NOT NULL)";
-				
+				      + "MH_ID INTEGER NOT NULL)";				
 		   stm1.executeUpdate(sql1);
-		   
-		   
-			
-		     sql1="(CREATE TABLE hospital"
+		 
+		     sql1="CREATE TABLE hospital( "
 				      + "id TEXT PRIMARY KEY ,"
 				      + "city TEXT NOT NULL)";
 				      
 		   stm1.executeUpdate(sql1);
-		   
-		   
-			
-		     sql1="(CREATE TABLE donation"
-				      + "type ENUM('AUTOTRANSPLANTE', 'ISOTRANSPLANTE', 'XENOTRANSPLANTE', 'ALOTRANSPLANTE',"
+		     sql1="CREATE TABLE donation( "
+				      + "type TEXT NOT NULL,"
 				      + "name TEXT NOT NULL)";
 				      
 		   stm1.executeUpdate(sql1);
 		   
 		   
 			
-		     sql1="(CREATE TABLE MH"
+		     sql1="CREATE TABLE MH ("
 				      + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				      + "blood_type TEXT," 
 				      + "p_illnesses TEXT,"
 				      + "a_illnesses TEXT,"
-				      + "date LOCALDATE";
+				      + "date LOCALDATE)";
 		   
 		    stm1.executeUpdate(sql1);
 		    
 			
-		     sql1="(CREATE TABLE request"
+		     sql1="CREATE TABLE request( "
 				      + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
 		    		  + "match BOOLEAN)";
 				      
 		   stm1.executeUpdate(sql1);
 		   
-		    sql1="(CREATE TABLE relationship"
+		    sql1="CREATE TABLE relationship( "
 				      + "patient_id INTEGER,"
 		    		  + "donor_id INTEGER,"
-				      + "PRIMARY KEY(patient_id, donor_id)";
+				      + "PRIMARY KEY(patient_id, donor_id))";
 				      
-		   stm1.executeUpdate(sql1);
-		   
-		   
+		   stm1.executeUpdate(sql1);		   
+		   stm1.close();
 		   
 		  
 		} catch(SQLException e) {
 			//TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.print("TABLAS");
 		}
 
 	}
@@ -276,8 +267,9 @@ try {
 	System.out.print("Actual illnesses: ");
 	String actual_illnesses= reader.readLine();
 	System.out.print("Date: ");
-	LocalDate date= reader.read();
-	
+	String date=reader.readLine();
+	//TODO localDate 
+        
 	Statement stmt=c.createStatement();
 	String sql = "INSERT INTO MH (id, blootype,p_illnesses,a_illnesses,date) "
 			+ "VALUES ('" + id + "', '" + bloodtype+ "', '" + previous_illnesses + "', '" +
