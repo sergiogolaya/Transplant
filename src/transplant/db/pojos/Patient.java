@@ -42,6 +42,18 @@ public class Patient {
 		this.donationlist = new ArrayList<Donation>();
 	}
 
+	public void addDonor(Donor d) {
+		if (!donorlist.contains(d)) {
+			donorlist.add(d);
+		}
+	}
+
+	public void removeDonor(Donor d) {
+		if (donorlist.contains(d)) {
+			donorlist.remove(d);
+		}
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -126,5 +138,4 @@ public class Patient {
 			return false;
 		return true;
 	}
-
 }
