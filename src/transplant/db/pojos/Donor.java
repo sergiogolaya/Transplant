@@ -10,7 +10,6 @@ public class Donor {
 	private int age;
 	private int organ_id;
 	private int mh_id;
-	private String h_id;
 	private int id;
 	private List<Patient> patientlist;
 
@@ -19,14 +18,13 @@ public class Donor {
 		this.patientlist = new ArrayList<Patient>();
 	}
 
-	public Donor(String name, String gender, int age, int organ_id, int mh_id, String h_id, int id) {
+	public Donor(String name, String gender, int age, int organ_id, int mh_id, int id) {
 		super();
 		this.name = name;
 		this.gender = gender;
 		this.age = age;
 		this.organ_id = organ_id;
 		this.mh_id = mh_id;
-		this.h_id = h_id;
 		this.id = id;
 		this.patientlist = new ArrayList<Patient>();
 	}
@@ -91,14 +89,7 @@ public class Donor {
 		this.mh_id = mh_id;
 	}
 
-	public String getH_id() {
-		return h_id;
-	}
-
-	public void setH_id(String h_id) {
-		this.h_id = h_id;
-	}
-
+	
 	/*
 	 * public void addDonor(Donor donor) { if (!(donorlist).contains(donor)) {
 	 * donor.addDonor(donor); } }

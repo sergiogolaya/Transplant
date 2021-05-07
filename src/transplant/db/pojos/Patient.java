@@ -10,7 +10,7 @@ public class Patient {
 	private Integer age;
 	private Integer donation_id;
 	private Integer mh_id;
-	private Integer h_id;
+	private String h_id;
 	private List<Donor> donorlist;
 	private List<Donation> donationlist;
 
@@ -28,8 +28,8 @@ public class Patient {
 		this.donationlist = new ArrayList<Donation>();
 	}
 
-	public Patient(Integer id, String name, String gender, Integer age, Integer donation_id, Integer mh_id,
-			Integer h_id) {
+	public Patient(int id, String name, String gender,int age, int donation_id, int mh_id,
+			String h_id) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -102,11 +102,11 @@ public class Patient {
 		this.mh_id = mh_id;
 	}
 
-	public Integer getH_id() {
+	public String getH_id() {
 		return h_id;
 	}
 
-	public void setH_id(Integer h_id) {
+	public void setH_id(String h_id) {
 		this.h_id = h_id;
 	}
 
