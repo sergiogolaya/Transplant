@@ -10,7 +10,7 @@ public class Patient {
 	private Integer age;
 	private Integer donation_id;
 	private Integer mh_id;
-	private Integer h_id;
+	private String h_id;
 	private List<Donor> donorlist;
 	private List<Donation> donationlist;
 
@@ -29,7 +29,7 @@ public class Patient {
 	}
 
 	public Patient(Integer id, String name, String gender, Integer age, Integer donation_id, Integer mh_id,
-			Integer h_id) {
+			String h_id) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -40,6 +40,20 @@ public class Patient {
 		this.h_id = h_id;
 		this.donorlist = new ArrayList<Donor>();
 		this.donationlist = new ArrayList<Donation>();
+	}
+	
+
+	public Patient(String name, String gender, Integer age, Integer donation_id, Integer mh_id, String h_id
+			) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.age = age;
+		this.donation_id = donation_id;
+		this.mh_id = mh_id;
+		this.h_id = h_id;
+		this.donorlist = new ArrayList<Donor>();
+		this.donationlist =  new ArrayList<Donation>();
 	}
 
 	public void addDonor(Donor d) {
@@ -102,11 +116,11 @@ public class Patient {
 		this.mh_id = mh_id;
 	}
 
-	public Integer getH_id() {
+	public String getH_id() {
 		return h_id;
 	}
 
-	public void setH_id(Integer h_id) {
+	public void setH_id(String h_id) {
 		this.h_id = h_id;
 	}
 

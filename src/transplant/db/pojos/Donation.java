@@ -1,5 +1,6 @@
 package transplant.db.pojos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Donation {
@@ -14,6 +15,15 @@ public class Donation {
 		this.name = name;
 		this.type = type;
 	}
+
+	
+	public Donation(String name, String type) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.donationlist = new ArrayList <Donation>();
+	}
+
 
 	public Integer getId() {
 		return id;

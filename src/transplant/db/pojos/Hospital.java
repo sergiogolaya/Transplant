@@ -13,6 +13,7 @@ public class Hospital {
 		super();
 		this.patientlist = new ArrayList<Patient>();
 	}
+	
 	public Hospital(String idname, String city) {
 		super();
 		this.idname = idname;
