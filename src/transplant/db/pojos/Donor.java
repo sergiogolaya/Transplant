@@ -8,7 +8,7 @@ public class Donor {
 	private String name;
 	private String gender;
 	private int age;
-	private int organ_id;
+	private int donation_id;
 	private int mh_id;
 	private int id;
 	private List<Patient> patientlist;
@@ -17,16 +17,27 @@ public class Donor {
 		super();
 		this.patientlist = new ArrayList<Patient>();
 	}
-
-	public Donor(String name, String gender, int age, int organ_id, int mh_id, int id) {
+	
+	public Donor(String name, String gender, int age, int donation_id, int mh_id, int id) {
 		super();
 		this.name = name;
 		this.gender = gender;
 		this.age = age;
-		this.organ_id = organ_id;
+		this.donation_id = donation_id;
 		this.mh_id = mh_id;
 		this.id = id;
 		this.patientlist = new ArrayList<Patient>();
+	}
+
+	
+	public Donor(String name, String gender, int age, int donation_id, int mh_id) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.age = age;
+		this.donation_id = donation_id;
+		this.mh_id = mh_id;
+		this.patientlist = new ArrayList <Patient>();
 	}
 
 	public void addPatient(Patient p) {
@@ -73,12 +84,12 @@ public class Donor {
 		this.age = age;
 	}
 
-	public int getOrgan_id() {
-		return organ_id;
+	public int getDonation_id() {
+		return donation_id;
 	}
 
-	public void setOrgan_id(int organ_id) {
-		this.organ_id = organ_id;
+	public void setDonation_id(int donation_id) {
+		this.donation_id = donation_id;
 	}
 
 	public int getMh_id() {
@@ -88,14 +99,5 @@ public class Donor {
 	public void setMh_id(int mh_id) {
 		this.mh_id = mh_id;
 	}
-
-	
-	/*
-	 * public void addDonor(Donor donor) { if (!(donorlist).contains(donor)) {
-	 * donor.addDonor(donor); } }
-	 * 
-	 * public void removeDonor(Donor donor) { if (donorlist.contains(donor)) {
-	 * donorlist.remove(donor); } }
-	 */
 
 }

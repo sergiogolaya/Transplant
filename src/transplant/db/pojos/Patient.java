@@ -31,6 +31,7 @@ public class Patient {
 	public Patient(int id, String name, String gender,int age, int donation_id, int mh_id,
 			String h_id) {
 		super();
+		
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
@@ -40,6 +41,20 @@ public class Patient {
 		this.h_id = h_id;
 		this.donorlist = new ArrayList<Donor>();
 		this.donationlist = new ArrayList<Donation>();
+	}
+	
+
+	public Patient(String name, String gender, Integer age, Integer donation_id, Integer mh_id, String h_id
+			) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.age = age;
+		this.donation_id = donation_id;
+		this.mh_id = mh_id;
+		this.h_id = h_id;
+		this.donorlist = new ArrayList<Donor>();
+		this.donationlist =  new ArrayList<Donation>();
 	}
 
 	public void addDonor(Donor d) {
