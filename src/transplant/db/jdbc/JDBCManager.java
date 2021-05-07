@@ -13,6 +13,7 @@ import java.util.List;
 
 import transplant.db.ifaces.DBManager;
 import transplant.db.pojos.Donor;
+import transplant.db.pojos.Patient;
 
 
 
@@ -20,27 +21,11 @@ import transplant.db.pojos.Donor;
 public class JDBCManager implements DBManager {
 
 	private Connection c;
-
-	@Override
 	public void connect() {
 		try {
-<<<<<<< HEAD
-	        // Open database connection
-		    Class.forName("org.sqlite.JDBC");
-		    c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");
-	        c.createStatement().execute("PRAGMA foreign_keys=ON");
-		    System.out.println("Database connection opened.");
-            this.createTables();
-	}   
-		catch(SQLException sqlE) {
-			 System.out.println("There was a database exception.");
-		     sqlE.printStackTrace();
-		}
-		catch(Exception e) {
-=======
 			// Open database connection
 			Class.forName("org.sqlite.JDBC");
-			Connection c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");
+			c = DriverManager.getConnection("jdbc:sqlite:./db/transplant.db");
 			c.createStatement().execute("PRAGMA foreign_keys=ON");
 			System.out.println("Database connection opened.");
 			this.createTables();
@@ -48,21 +33,14 @@ public class JDBCManager implements DBManager {
 			System.out.println("There was a database exception.");
 			sqlE.printStackTrace();
 		} catch (Exception e) {
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 			System.out.println("There was a general exception.");
 			e.printStackTrace();
 		}
 	}
 
 	private void createTables() {
-		// If the tables are not created already, create them
-<<<<<<< HEAD
-=======
-
-		Statement stm1;
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
+	
 		try {
-<<<<<<< HEAD
            
 			Statement stm1= c.createStatement();
 		
@@ -121,52 +99,11 @@ public class JDBCManager implements DBManager {
 				      
 		   stm1.executeUpdate(sql1);		   
 		   stm1.close();
-		   
-		  
-		} catch(SQLException e) {
-			//TODO Auto-generated catch block
-=======
-			// Create the jobs table
-			stm1 = c.createStatement();
-
-			String sql1 = "(CREATE TABLE patient" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-					+ "gender ENUM('MUJER', 'HOMBRE') NOT NULL," + "age INTEGER NOT NULL,"
-					+ "organ_ID INTEGER NOT NULL," + "MH_ID INTEGER NOT NULL," + "H_ID INTEGER NOT NULL)";
-			stm1.executeUpdate(sql1);
-
-			sql1 = "(CREATE TABLE donor" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-					+ "gender ENUM('MUJER','HOMBRE')," + "age INTEGER NOT NULL," + "organ_ID INTEGER NOT NULL,"
-					+ "MH_ID INTEGER NOT NULL)";
-
-			stm1.executeUpdate(sql1);
-
-			sql1 = "(CREATE TABLE hospital" + "id TEXT PRIMARY KEY ," + "city TEXT NOT NULL)";
-
-			stm1.executeUpdate(sql1);
-
-			sql1 = "(CREATE TABLE donation"
-					+ "type ENUM('AUTOTRANSPLANTE', 'ISOTRANSPLANTE', 'XENOTRANSPLANTE', 'ALOTRANSPLANTE',"
-					+ "name TEXT NOT NULL)";
-
-			stm1.executeUpdate(sql1);
-
-			sql1 = "(CREATE TABLE MH" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "blood_type TEXT,"
-					+ "p_illnesses TEXT," + "a_illnesses TEXT," + "date LOCALDATE";
-
-			stm1.executeUpdate(sql1);
-
-			sql1 = "(CREATE TABLE request" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "match BOOLEAN)";
-
-			stm1.executeUpdate(sql1);
-
-			sql1 = "(CREATE TABLE relationship" + "patient_id INTEGER," + "donor_id INTEGER,"
-					+ "PRIMARY KEY(patient_id, donor_id)";
-
-			stm1.executeUpdate(sql1);
+			
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 			e.printStackTrace();
 			System.out.print("TABLAS");
 		}
@@ -199,7 +136,7 @@ public class JDBCManager implements DBManager {
 
 	public void addPatient() {
 		try {
-
+			String aux;
 			// TODO TENDREMOS QUE HACER UN METODO QUE INTRODUZCA EL ID DE ORGAN QUE COINCIDE
 			// CON EL DE DONOR Y HACER INSERT PARA QUE LO GUARDE EN LA TABLA
 			// Get the employee info from the command prompt
@@ -210,13 +147,21 @@ public class JDBCManager implements DBManager {
 			System.out.print("Gender: ");
 			String patientgender = reader.readLine();
 			System.out.print("Age: ");
-			String patientage = reader.readLine();
+			aux = reader.readLine();
+			Integer patientage=Integer.parseInt(aux);
 			System.out.print("Medical History: ");
-			String medical_history = reader.readLine();
+			aux = reader.readLine();
+			Integer medical_history=Integer.parseInt(aux);
 			System.out.print("Hospital id: ");
-			String hospital_id = reader.readLine();
+			String hospital_id= reader.readLine();
+			
+			
 
 			Statement stmt = c.createStatement();
+			//String sql = "INSERT INTO patient (name, gender, age, MH_ID, H_ID) " + "VALUES (?, ?, ?, ?, ?)";
+			//PreparedStatement prep = c.prepareSatement(sql);
+			//prep.setString(1, patientname);
+			//prep.setNull(3, java.sql.TYPES.INTEGER);
 			String sql = "INSERT INTO patient (name, gender, age, MH_ID, H_ID) " + "VALUES ('" + patientname + "', '"
 					+ patientgender + "', '" + patientage + "," + medical_history + "," + hospital_id + "');";
 			stmt.executeUpdate(sql);
@@ -301,8 +246,6 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 	}
-
-<<<<<<< HEAD
 	public void addMedicalHospital() {
 		try {
 
@@ -317,7 +260,7 @@ public class JDBCManager implements DBManager {
 			System.out.print("Actual illnesses: ");
 			String actual_illnesses = reader.readLine();
 			System.out.print("Date: ");
-			LocalDate date = reader.read();
+			String date = reader.readLine();
 
 			Statement stmt = c.createStatement();
 			String sql = "INSERT INTO MH (id, blootype,p_illnesses,a_illnesses,date) " + "VALUES ('" + id + "', '"
@@ -373,36 +316,7 @@ public class JDBCManager implements DBManager {
 		}
 		return patients;
 	}
-=======
-	
-	System.out.println("Please, input the MedicalHistory info:");
-	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	System.out.print("Id: ");
-	String id = reader.readLine();
-	System.out.print("Blood type: ");
-	String bloodtype = reader.readLine();
-	System.out.print("Previous illnesses: ");
-	String previous_illnesses= reader.readLine();
-	System.out.print("Actual illnesses: ");
-	String actual_illnesses= reader.readLine();
-	System.out.print("Date: ");
-	String date=reader.readLine();
-	//TODO localDate 
-        
-	Statement stmt=c.createStatement();
-	String sql = "INSERT INTO MH (id, blootype,p_illnesses,a_illnesses,date) "
-			+ "VALUES ('" + id + "', '" + bloodtype+ "', '" + previous_illnesses + "', '" +
-			actual_illnesses +"', '" + date
-				+ "');";
-	stmt.executeUpdate(sql);
-	stmt.close();
-	System.out.println("Medical history info processed");
-	System.out.println("Records inserted.");
-}
-catch (Exception e) {
-	e.printStackTrace();
-}
-}
+
 			
 public List<Donor> searchDonorById(int id) {
 	List<Donor> donorList = new ArrayList<Donor>();
@@ -431,10 +345,6 @@ public List<Donor> searchDonorById(int id) {
 	return donorList;
 }
 
-			
-			
-	
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant
 
 	@Override
 	public void disconnect() {
