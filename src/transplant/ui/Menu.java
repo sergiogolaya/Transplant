@@ -25,12 +25,12 @@ public class Menu {
 	private static DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	public static void main(String[] args) throws Exception {
 		dbman.connect();
-		//addPatient();
-		//addDonor();
-		//addHospital();
-		//addDonation();
-		//addMedicalHistory();
-		//addRequest();
+		addPatient();
+		addDonor();
+		addHospital();
+		addDonation();
+		addMedicalHistory();
+		addRequest();
 		searchDonor();
 		dbman.disconnect();
 		}
