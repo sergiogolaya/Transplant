@@ -243,7 +243,10 @@ public class JDBCManager implements DBManager {
 			Statement stmt = c.createStatement();
 			String sql = "SELECT * FROM request";
 			ResultSet rs = stmt.executeQuery(sql);
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 			while (rs.next()) {
 				int p_id = rs.getInt("patient_id");
 				int d_id = rs.getInt("donor_id");
@@ -257,6 +260,7 @@ public class JDBCManager implements DBManager {
 		}
 	}
 
+<<<<<<< HEAD
 	public void modifyPatient(Integer id, Integer newAge) {
 		try {
 
@@ -273,6 +277,9 @@ public class JDBCManager implements DBManager {
 	}
 
 	public void deleteRequest(int patient_id, int donor_id) {
+=======
+	public void deleteRequest(Integer patient_id, Integer donor_id) {
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 		try {
 			String sql = "DELETE FROM request WHERE patient_id = ? AND donor_id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
