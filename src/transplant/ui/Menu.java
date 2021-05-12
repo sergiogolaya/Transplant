@@ -25,12 +25,13 @@ public class Menu {
 	private static DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	public static void main(String[] args) throws Exception {
 		dbman.connect();
-		addPatient();
-		addDonor();
-		addHospital();
-		addDonation();
-		addMedicalHistory();
-		addRequest();
+		//addPatient();
+		//addDonor();
+		//addHospital();
+		//addDonation();
+		//addMedicalHistory();
+		//addRequest();
+		searchDonor();
 		dbman.disconnect();
 		}
 private static void addPatient() throws Exception{
@@ -128,4 +129,33 @@ public static void addRequest() throws Exception{
 	Request r=new Request(patient_id,donor_id);
 	dbman.addRequest(r);
 }
+private static void searchPatient() throws Exception {
+	System.out.println("Please, input the search term:");
+	System.out.print("Patient id: ");
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	String aux= reader.readLine();
+	Integer id=Integer.parseInt(aux);
+	List<Patient> patients = dbman.searchPatientById(id);
+	if (patients.isEmpty()) {
+		System.out.println("No results.");
+	}
+	else {
+		System.out.println(patients);
+	}
+}
+private static void searchDonor() throws Exception {
+	System.out.println("Please, input the search term:");
+	System.out.print("Donor id: ");
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	String aux= reader.readLine();
+	Integer id=Integer.parseInt(aux);
+	List<Donor> donors = dbman.searchDonorById(id);
+	if (donors.isEmpty()) {
+		System.out.println("No results.");
+	}
+	else {
+		System.out.println(donors);
+	}
+}
+
 }
