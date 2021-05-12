@@ -17,6 +17,7 @@ import transplant.db.pojos.Donor;
 import transplant.db.pojos.Hospital;
 import transplant.db.pojos.M_h;
 import transplant.db.pojos.Patient;
+import transplant.db.pojos.Request;
 
 public class JDBCManager implements DBManager {
 
@@ -67,11 +68,7 @@ public class JDBCManager implements DBManager {
 
 			stm1.executeUpdate(sql1);
 
-			sql1 = "CREATE TABLE request( " + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "match BOOLEAN)";
-
-			stm1.executeUpdate(sql1);
-
-			sql1 = "CREATE TABLE relationship( " + "patient_id INTEGER," + "donor_id INTEGER,"
+			sql1 = "CREATE TABLE request("+ "patient_id INTEGER," + "donor_id INTEGER,"
 					+ "PRIMARY KEY(patient_id, donor_id))";
 
 			stm1.executeUpdate(sql1);
@@ -186,6 +183,7 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 	}
+	
 
 	public void addMedicalHistory(M_h mh) {
 		try {
@@ -204,6 +202,22 @@ public class JDBCManager implements DBManager {
 		}
 	}
 
+	public void addRequest(Request r) {
+		try {
+			String sql = "INSERT INTO request (patient_id,donor_id) VALUES (?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, r.getPatient_id());
+			prep.setInt(2, r.getDonor_id());
+			prep.executeUpdate();
+			prep.close();
+			
+			
+			System.out.println("Request information processed");
+			System.out.println("Records inserted.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 //@Override
 	public Patient getPatient(int id) {
 		try {

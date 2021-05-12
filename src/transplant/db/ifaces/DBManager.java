@@ -5,6 +5,7 @@ import transplant.db.pojos.Donor;
 import transplant.db.pojos.Hospital;
 import transplant.db.pojos.M_h;
 import transplant.db.pojos.Patient;
+import transplant.db.pojos.Request;
 
 public interface DBManager {
 	
@@ -16,6 +17,7 @@ public interface DBManager {
 	public void addHospital(Hospital h);
 	public void addDonation(Donation don);
 	public void addMedicalHistory(M_h mh);
+	public void addRequest(Request r);
 
 	//public List<Person> searchPersonByName(String name);
 	

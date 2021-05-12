@@ -17,6 +17,7 @@ import transplant.db.pojos.Donor;
 import transplant.db.pojos.Hospital;
 import transplant.db.pojos.M_h;
 import transplant.db.pojos.Patient;
+import transplant.db.pojos.Request;
 
 
 public class Menu {
@@ -24,11 +25,12 @@ public class Menu {
 	private static DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	public static void main(String[] args) throws Exception {
 		dbman.connect();
-		//addPatient();
-		//addDonor();
-		//addHospital();
-		//addDonation();
+		addPatient();
+		addDonor();
+		addHospital();
+		addDonation();
 		addMedicalHistory();
+		addRequest();
 		dbman.disconnect();
 		}
 private static void addPatient() throws Exception{
@@ -111,5 +113,19 @@ public static void addMedicalHistory() throws Exception{
 	LocalDate date = LocalDate.parse(reader.readLine(), formatter);
 	M_h mh=new M_h(bloodtype,previous_illnesses,actual_illnesses, Date.valueOf(date));
 	dbman.addMedicalHistory(mh);
+}
+public static void addRequest() throws Exception{
+	String aux;
+	System.out.println("Please, input the Request info:");
+	BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	System.out.print("Patient id: ");
+	aux = reader.readLine();
+	Integer patient_id=Integer.parseInt(aux);
+	System.out.print("Donor id: ");
+	aux = reader.readLine();
+	Integer donor_id=Integer.parseInt(aux);
+	
+	Request r=new Request(patient_id,donor_id);
+	dbman.addRequest(r);
 }
 }
