@@ -237,6 +237,54 @@ public class JDBCManager implements DBManager {
 
 	}
 
+	public void printRequests() {
+		try {
+
+			Statement stmt = c.createStatement();
+			String sql = "SELECT * FROM request";
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				int p_id = rs.getInt("patient_id");
+				int d_id = rs.getInt("donor_id");
+				Request request = new Request(p_id, d_id);
+				System.out.println(request);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void modifyPatient(Integer id, Integer newAge) {
+		try {
+
+			String sql = "UPDATE patient SET age=? WHERE id=?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, newAge);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void deleteRequest(int patient_id, int donor_id) {
+		try {
+			String sql = "DELETE FROM request WHERE patient_id = ? AND donor_id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, patient_id);
+			prep.setInt(2, donor_id);
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public List<Patient> searchPatientById(Integer id) {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
@@ -245,14 +293,14 @@ public class JDBCManager implements DBManager {
 			PreparedStatement stmt = c.prepareStatement(sql);
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) { 
+			while (rs.next()) {
 				String name = rs.getString("name");
 				String gender = rs.getString("gender");
 				int age = rs.getInt("age");
 				int donation_id = rs.getInt("organ_ID");
 				int mh_id = rs.getInt("MH_ID");
 				String h_id = rs.getString("H_ID");
-				Patient p = new Patient(id,name,gender,age,donation_id,mh_id,h_id);
+				Patient p = new Patient(id, name, gender, age, donation_id, mh_id, h_id);
 				patients.add(p);
 			}
 			rs.close();
@@ -262,7 +310,7 @@ public class JDBCManager implements DBManager {
 		}
 		return patients;
 	}
-	
+
 	public List<Donor> searchDonorById(Integer id) {
 		List<Donor> donors = new ArrayList<Donor>();
 		try {
@@ -271,13 +319,13 @@ public class JDBCManager implements DBManager {
 			PreparedStatement stmt = c.prepareStatement(sql);
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) { 
+			while (rs.next()) {
 				String name = rs.getString("name");
 				String gender = rs.getString("gender");
 				int age = rs.getInt("age");
 				int donation_id = rs.getInt("organ_ID");
 				int mh_id = rs.getInt("MH_ID");
-				Donor d = new Donor(name,gender,age,donation_id,mh_id,id);
+				Donor d = new Donor(name, gender, age, donation_id, mh_id, id);
 				donors.add(d);
 			}
 			rs.close();
@@ -287,10 +335,6 @@ public class JDBCManager implements DBManager {
 		}
 		return donors;
 	}
-		
-				
-				
-	
 
 	@Override
 	public void disconnect() {
