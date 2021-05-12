@@ -33,6 +33,7 @@ public class Menu {
 		// addRequest();
 		// searchDonor();
 		// dbman.printRequests();
+		deleteRequest();
 		dbman.disconnect();
 	}
 
@@ -136,7 +137,18 @@ public class Menu {
 		Request r = new Request(patient_id, donor_id);
 		dbman.addRequest(r);
 	}
-	private
+
+	private static void deleteRequest() throws Exception {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Please, input the patient request id:");
+		String aux = reader.readLine();
+		Integer p_id = Integer.parseInt(aux);
+		System.out.println("Please, input the donor request id:");
+		aux = reader.readLine();
+		Integer d_id = Integer.parseInt(aux);
+		dbman.printRequests();
+		dbman.deleteRequest(p_id, d_id);
+	}
 
 	private static void searchPatient() throws Exception {
 		System.out.println("Please, input the search term:");

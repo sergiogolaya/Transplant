@@ -243,13 +243,6 @@ public class JDBCManager implements DBManager {
 			Statement stmt = c.createStatement();
 			String sql = "SELECT * FROM request";
 			ResultSet rs = stmt.executeQuery(sql);
-			/*
-			 * sql =
-			 * "SELECT p.name from request AS r JOIN patient AS p ON p.id =r.patient_id"; rs
-			 * = stmt.executeQuery(sql); sql =
-			 * "SELECT d.name from request AS r JOIN donor AS d ON d.id =r.donor_id"; rs =
-			 * stmt.executeQuery(sql);
-			 */
 			while (rs.next()) {
 				int p_id = rs.getInt("patient_id");
 				int d_id = rs.getInt("donor_id");
@@ -263,7 +256,7 @@ public class JDBCManager implements DBManager {
 		}
 	}
 
-	public void deleteRequest(int patient_id, int donor_id) {
+	public void deleteRequest(Integer patient_id, Integer donor_id) {
 		try {
 			String sql = "DELETE FROM request WHERE patient_id = ? AND donor_id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);

@@ -23,6 +23,7 @@ public interface DBManager {
 	public List<Patient> searchPatientById(Integer id);
 	public List<Donor> searchDonorById(Integer id);
 	public void printRequests();
+	public void deleteRequest(Integer patient_id, Integer donor_id)
 
 	//public List<Person> searchPersonByName(String name);
 	
