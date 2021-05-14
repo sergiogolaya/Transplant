@@ -1,9 +1,17 @@
 package transplant.db.pojos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Patient {
+@Entity
+@Table(name = "patients")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Patient")
+@XmlType(propOrder = { "name", "gender", "age" })
+
+public class Patient implements Serializable {
+	private static final long serialVersionUID = 3915252998504410580L;
 	private Integer id;
 	private String name;
 	private String gender;
@@ -28,10 +36,9 @@ public class Patient {
 		this.donationlist = new ArrayList<Donation>();
 	}
 
-	public Patient(int id, String name, String gender,int age, int donation_id, int mh_id,
-			String h_id) {
+	public Patient(int id, String name, String gender, int age, int donation_id, int mh_id, String h_id) {
 		super();
-		
+
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
@@ -42,10 +49,8 @@ public class Patient {
 		this.donorlist = new ArrayList<Donor>();
 		this.donationlist = new ArrayList<Donation>();
 	}
-	
 
-	public Patient(String name, String gender, Integer age, Integer donation_id, Integer mh_id, String h_id
-			) {
+	public Patient(String name, String gender, Integer age, Integer donation_id, Integer mh_id, String h_id) {
 		super();
 		this.name = name;
 		this.gender = gender;
@@ -54,7 +59,7 @@ public class Patient {
 		this.mh_id = mh_id;
 		this.h_id = h_id;
 		this.donorlist = new ArrayList<Donor>();
-		this.donationlist =  new ArrayList<Donation>();
+		this.donationlist = new ArrayList<Donation>();
 	}
 
 	public void addDonor(Donor d) {
