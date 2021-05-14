@@ -1,10 +1,13 @@
 package transplant.db.ifaces;
 
+import java.util.List;
+
 import transplant.db.pojos.Donation;
 import transplant.db.pojos.Donor;
 import transplant.db.pojos.Hospital;
 import transplant.db.pojos.M_h;
 import transplant.db.pojos.Patient;
+import transplant.db.pojos.Request;
 
 public interface DBManager {
 	
@@ -16,6 +19,15 @@ public interface DBManager {
 	public void addHospital(Hospital h);
 	public void addDonation(Donation don);
 	public void addMedicalHistory(M_h mh);
+	public void addRequest(Request r);
+	public List<Patient> searchPatientById(Integer id);
+	public List<Donor> searchDonorById(Integer id);
+	public void printRequests();
+<<<<<<< HEAD
+	public void modifyPatient(Integer id, Integer newAge);
+=======
+	public void deleteRequest(Integer patient_id, Integer donor_id)
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 
 	//public List<Person> searchPersonByName(String name);
 	

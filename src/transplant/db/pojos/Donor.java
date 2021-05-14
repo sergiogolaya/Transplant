@@ -100,4 +100,10 @@ public class Donor {
 		this.mh_id = mh_id;
 	}
 
+	@Override
+	public String toString() {
+		return "Donor [name=" + name + ", gender=" + gender + ", age=" + age + ", donation_id=" + donation_id
+				+ ", mh_id=" + mh_id + ", id=" + id + "]";
+	}
+
 }

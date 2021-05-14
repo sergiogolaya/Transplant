@@ -10,13 +10,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import transplant.db.ifaces.DBManager;
 import transplant.db.pojos.Donation;
 import transplant.db.pojos.Donor;
 import transplant.db.pojos.Hospital;
 import transplant.db.pojos.M_h;
 import transplant.db.pojos.Patient;
+import transplant.db.pojos.Request;
 
 public class JDBCManager implements DBManager {
 
@@ -67,11 +67,7 @@ public class JDBCManager implements DBManager {
 
 			stm1.executeUpdate(sql1);
 
-			sql1 = "CREATE TABLE request( " + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "match BOOLEAN)";
-
-			stm1.executeUpdate(sql1);
-
-			sql1 = "CREATE TABLE relationship( " + "patient_id INTEGER," + "donor_id INTEGER,"
+			sql1 = "CREATE TABLE request(" + "patient_id INTEGER," + "donor_id INTEGER,"
 					+ "PRIMARY KEY(patient_id, donor_id))";
 
 			stm1.executeUpdate(sql1);
@@ -80,7 +76,7 @@ public class JDBCManager implements DBManager {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 		}
 
 	}
@@ -146,7 +142,7 @@ public class JDBCManager implements DBManager {
 			prep.setInt(5, d.getMh_id());
 			prep.executeUpdate();
 			prep.close();
-			
+
 			System.out.println("Donor info processed");
 			System.out.println("Records inserted.");
 
@@ -163,8 +159,7 @@ public class JDBCManager implements DBManager {
 			prep.setString(2, h.getCity());
 			prep.executeUpdate();
 			prep.close();
-			
-			
+
 			System.out.println("Hospital information processed");
 			System.out.println("Records inserted.");
 		} catch (Exception e) {
@@ -204,6 +199,22 @@ public class JDBCManager implements DBManager {
 		}
 	}
 
+	public void addRequest(Request r) {
+		try {
+			String sql = "INSERT INTO request (patient_id,donor_id) VALUES (?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, r.getPatient_id());
+			prep.setInt(2, r.getDonor_id());
+			prep.executeUpdate();
+			prep.close();
+
+			System.out.println("Request information processed");
+			System.out.println("Records inserted.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 //@Override
 	public Patient getPatient(int id) {
 		try {
@@ -212,8 +223,10 @@ public class JDBCManager implements DBManager {
 			prep.setInt(1, id);
 			ResultSet rs = prep.executeQuery();
 			if (rs.next()) {
-				String patientName = rs.getString("name");
-				return new Patient(id, patientName);
+
+				return new Patient(id, rs.getString("name"), rs.getString("gender"), rs.getInt("age"),
+						rs.getInt("donation_id"), rs.getInt("mh_id"), rs.getString("h_id"));
+
 			}
 			rs.close();
 			prep.close();
@@ -224,20 +237,78 @@ public class JDBCManager implements DBManager {
 
 	}
 
-//@Override
-	public List<Patient> searchPatientByName(String name) {
+	public void printRequests() {
+		try {
+
+			Statement stmt = c.createStatement();
+			String sql = "SELECT * FROM request";
+			ResultSet rs = stmt.executeQuery(sql);
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
+			while (rs.next()) {
+				int p_id = rs.getInt("patient_id");
+				int d_id = rs.getInt("donor_id");
+				Request request = new Request(p_id, d_id);
+				System.out.println(request);
+			}
+			rs.close();
+			stmt.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+<<<<<<< HEAD
+	public void modifyPatient(Integer id, Integer newAge) {
+		try {
+
+			String sql = "UPDATE patient SET age=? WHERE id=?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, newAge);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public void deleteRequest(int patient_id, int donor_id) {
+=======
+	public void deleteRequest(Integer patient_id, Integer donor_id) {
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
+		try {
+			String sql = "DELETE FROM request WHERE patient_id = ? AND donor_id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, patient_id);
+			prep.setInt(2, donor_id);
+			prep.executeUpdate();
+			prep.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Patient> searchPatientById(Integer id) {
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
-			String sql = "SELECT * FROM patient WHERE name LIKE ?";
+
+			String sql = "SELECT * FROM patient WHERE id = ?";
 			PreparedStatement stmt = c.prepareStatement(sql);
-			stmt.setString(1, "%" + name + "%");
+			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) { // true: there is another result and I have advanced to it
-								// false: there are no more results
-				int id = rs.getInt("id");
-				String patientName = rs.getString("name");
-				Patient patient = new Patient(id, patientName);
-				patients.add(patient);
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String gender = rs.getString("gender");
+				int age = rs.getInt("age");
+				int donation_id = rs.getInt("organ_ID");
+				int mh_id = rs.getInt("MH_ID");
+				String h_id = rs.getString("H_ID");
+				Patient p = new Patient(id, name, gender, age, donation_id, mh_id, h_id);
+				patients.add(p);
 			}
 			rs.close();
 			stmt.close();
@@ -247,31 +318,29 @@ public class JDBCManager implements DBManager {
 		return patients;
 	}
 
-	public List<Donor> searchDonorById(int id) {
-		List<Donor> donorList = new ArrayList<Donor>();
+	public List<Donor> searchDonorById(Integer id) {
+		List<Donor> donors = new ArrayList<Donor>();
 		try {
-			String sql = "SELECT * FROM Donor WHERE id = ?";
+
+			String sql = "SELECT * FROM donor WHERE id = ?";
 			PreparedStatement stmt = c.prepareStatement(sql);
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) { // true: there is another result and I have advanced to it
-								// false: there are no more results
+			while (rs.next()) {
 				String name = rs.getString("name");
 				String gender = rs.getString("gender");
 				int age = rs.getInt("age");
-				int organ_ID = rs.getInt("organ_ID");
-				int MH_ID = rs.getInt("MH_ID");
-				String h_id = rs.getString("h_id");
-				int idDonor = rs.getInt("id");
-				Donor donor1 = new Donor(name, gender, age, organ_ID, MH_ID, idDonor);
-				donorList.add(donor1);
+				int donation_id = rs.getInt("organ_ID");
+				int mh_id = rs.getInt("MH_ID");
+				Donor d = new Donor(name, gender, age, donation_id, mh_id, id);
+				donors.add(d);
 			}
 			rs.close();
 			stmt.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return donorList;
+		return donors;
 	}
 
 	@Override
