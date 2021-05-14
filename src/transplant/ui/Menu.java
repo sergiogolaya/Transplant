@@ -25,17 +25,8 @@ public class Menu {
 
 	public static void main(String[] args) throws Exception {
 		dbman.connect();
-<<<<<<< HEAD
-		//addPatient();
-		/*addDonor();
-		addHospital();
-		addDonation();
-		addMedicalHistory();
-		addRequest();
-		searchDonor();*/
 		
-		modifyPatientAge();
-=======
+		//modifyPatientAge();
 		// addPatient();
 		// addDonor();
 		// addHospital();
@@ -44,8 +35,7 @@ public class Menu {
 		// addRequest();
 		// searchDonor();
 		// dbman.printRequests();
-		deleteRequest();
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
+		//deleteRequest();
 		dbman.disconnect();
 	}
 
@@ -149,9 +139,6 @@ public class Menu {
 		Request r = new Request(patient_id, donor_id);
 		dbman.addRequest(r);
 	}
-<<<<<<< HEAD
-	
-=======
 
 	private static void deleteRequest() throws Exception {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -164,7 +151,6 @@ public class Menu {
 		dbman.printRequests();
 		dbman.deleteRequest(p_id, d_id);
 	}
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 
 	private static void searchPatient() throws Exception {
 		System.out.println("Please, input the search term:");
@@ -193,7 +179,8 @@ public class Menu {
 			System.out.println(donors);
 		}
 	}
-	private static void modifyPatientAge() throws Exception{
+
+	private static void modifyPatientAge() throws Exception {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Choose a patient, type its id: ");
 		dbman.printRequests();
