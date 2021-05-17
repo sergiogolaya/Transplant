@@ -23,11 +23,8 @@ public interface DBManager {
 	public List<Patient> searchPatientById(Integer id);
 	public List<Donor> searchDonorById(Integer id);
 	public void printRequests();
-<<<<<<< HEAD
 	public void modifyPatient(Integer id, Integer newAge);
-=======
-	public void deleteRequest(Integer patient_id, Integer donor_id)
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
+	public void deleteRequest(Integer patient_id, Integer donor_id);
 
 	//public List<Person> searchPersonByName(String name);
 	

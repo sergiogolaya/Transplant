@@ -90,7 +90,19 @@ public class Menu {
 	}
 
 	public static void main(String[] args) throws Exception {
-
+		dbman.connect();
+		
+		//modifyPatientAge();
+		// addPatient();
+		// addDonor();
+		// addHospital();
+		// addDonation();
+		// addMedicalHistory();
+		// addRequest();
+		// searchDonor();
+		// dbman.printRequests();
+		//deleteRequest();
+		dbman.disconnect();
 		// HOSPITAL MENU
 		int opc = imprimirMenuHospital();
 		switch (opc) {
@@ -114,6 +126,7 @@ public class Menu {
 			break;
 		}
 
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 	}
 
 	private static void addPatient() throws Exception {
