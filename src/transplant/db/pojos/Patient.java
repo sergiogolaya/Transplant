@@ -3,6 +3,7 @@ package transplant.db.pojos;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,24 +15,48 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @Entity
 @Table(name = "patients")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
-@XmlType(propOrder = { "name", "gender", "age" })
+@XmlType(propOrder = { "gender", "age", "donation_id", "mh_id", "h_id" })
 
 public class Patient implements Serializable {
 	private static final long serialVersionUID = 3915252998504410580L;
+
+	@Id
+	@GeneratedValue(generator = "patients")
+	@TableGenerator(name = "patients", table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "employees")
+	@XmlAttribute
 	private Integer id;
+	@XmlAttribute
 	private String name;
+	@XmlAttribute
 	private String gender;
+	@XmlAttribute
 	private Integer age;
+	@XmlAttribute
 	private Integer donation_id;
+	@XmlAttribute
 	private Integer mh_id;
+	@XmlAttribute
 	private String h_id;
+	@XmlAttribute
+	@ManyToMany(mappedBy = "authors")
+	@XmlTransient
 	private List<Donor> donorlist;
+	@XmlElement
+	@ManyToOne(fetch = FetchType.LAZY)
+	@XmlTransient
 	private List<Donation> donationlist;
 
 	public Patient() {
