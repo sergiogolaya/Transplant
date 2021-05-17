@@ -1,9 +1,53 @@
 package transplant.db.pojos;
 
+import java.io.Serializable;
+
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Donor {
+@Entity
+@Table(name = "donor")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "donor")
+@XmlType(propOrder = { "name", "gender", "age","donation_id" ,"mh_id","patientlist"  })
+ /*@name
+@GeneratedValue(generator="donor")
+@TableGenerator(name="donor", table="sqlite_sequence",
+    pkColumnName="name", valueColumnName="seq", pkColumnValue="departments")
+
+@XmlAttribute
+private String name;
+@XmlElement
+private String gender;
+@XmlElement
+private integer age;
+@XmlElement
+private integer donation_id;
+@XmlElement
+private integer mh_id;
+@OneToMany(mappedBy="department")
+@XmlElement(name = "donor")
+@XmlElementWrapper(name = "donor")
+private List <Patient> patientlist;*/
+
+public class Donor implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 
 	private String name;
 	private String gender;
@@ -12,6 +56,9 @@ public class Donor {
 	private int mh_id;
 	private int id;
 	private List<Patient> patientlist;
+	
+	
+
 
 	public Donor(List<Patient> patientlist) {
 		super();
