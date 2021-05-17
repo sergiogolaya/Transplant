@@ -125,8 +125,6 @@ public class Menu {
 				;// exit
 			break;
 		}
-
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 	}
 
 	private static void addPatient() throws Exception {
