@@ -1,13 +1,50 @@
 package transplant.db.pojos;
 
+import java.io.Serializable;
 import java.sql.Date;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-public class M_h {
+
+@Entity
+@Table(name="MH")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="MH")
+@XmlType(propOrder= {"id", "bloodtype", "previous_I", "actual_I", "date"})
+public class M_h implements Serializable{
 	
+	private static final long serialVersionUID = 7968504404923845972L;
+		
+	@Id
+	@GeneratedValue(generator="MH")
+    @TableGenerator(name="MH", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="MH")
+	    @XmlAttribute
 		private Integer id;
+	    @XmlAttribute
 		private String bloodtype;
+	    @XmlAttribute
 		private String previous_I;
+	    @XmlAttribute
 		private String actual_I;
+	    @XmlAttribute
 		private Date date;
 		
 		public M_h(Integer id, String bloodtype, String previous_I, String actual_I, Date date) {
@@ -126,6 +163,3 @@ public class M_h {
 
 	
 }
-
-
-

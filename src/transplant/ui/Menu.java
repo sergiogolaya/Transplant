@@ -102,32 +102,27 @@ public class Menu {
 	public static void main(String[] args) throws Exception {
 		dbman.connect();
 		userman.connect();
+		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+		int option = Integer.parseInt(console.readLine());
 
-		do {
+		System.out.println("1.Register");
+		System.out.println("2. Log in");
+		System.out.println("3. Exit");
+		switch (option) {
+		case 1:
+			register();
+			break;
+		case 2:
+			logIn();
+			break;
+		case 3:
+			dbman.disconnect();
+			userman.disconnect();
+			System.exit(0);
+		default:
+			break;
 
-			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-			int option = Integer.parseInt(console.readLine());
-
-			System.out.println("1.Register");
-			System.out.println("2. Log in");
-			System.out.println("3. Exit");
-			switch (option) {
-			case 1:
-				register();
-				break;
-			case 2:
-				//logIn();
-				break;
-			case 3:
-				dbman.disconnect();
-				userman.disconnect();
-				System.exit(0);
-			default:
-				break;
-
-			}
-
-		} while (true);
+		}
 
 		// HOSPITAL MENU
 		/*
@@ -150,15 +145,56 @@ public class Menu {
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int profile = Integer.parseInt(console.readLine());
 
-		
 		switch (profile) {
-		case 1: 
+		case 1:
 			registerPatient();
+			break;
 		case 2:
 			registerDonor();
+			break;
 		case 3:
 			registerHospital();
+			break;
+		}
 	}
+
+	private static void logIn() throws IOException {
+		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Please, introduce your email: ");
+		String email = console.readLine();
+		System.out.println("Please, introduce your password: ");
+		String password = console.readLine();
+		User u = userman.checkPassword(email, password);
+		if (u == null) {
+			System.out.println("Wrong email or password");
+		} else if (u.getRole().getName().equalsIgnoreCase("patient")) {
+			patientMenu(u);
+		}
+
+		else if (u.getRole().getName().equalsIgnoreCase("donor")) {
+			donorMenu(u);
+		} else if (u.getRole().getName().equalsIgnoreCase("hospital")) {
+			hospitalMenu(u);
+		}
+
+	}
+
+	private static void hospitalMenu(User u) {
+		// TODO Auto-generated method stub
+		System.out.println("Choose an option: ");
+
+	}
+
+	private static void donorMenu(User u) {
+		// TODO Auto-generated method stub
+		System.out.println("Choose an option: ");
+
+	}
+
+	private static void patientMenu(User u) {
+		// TODO Auto-generated method stub
+		System.out.println("Choose an option: ");
+
 	}
 
 	private static void registerPatient() throws IOException, NoSuchAlgorithmException {
@@ -176,7 +212,7 @@ public class Menu {
 		addPatientU(u.getId());
 
 	}
-	
+
 	private static void registerDonor() throws IOException, NoSuchAlgorithmException {
 		System.out.println("Please, choose an email: ");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -192,7 +228,7 @@ public class Menu {
 		addDonorU(u.getId());
 
 	}
-	
+
 	private static void registerHospital() throws IOException, NoSuchAlgorithmException {
 		System.out.println("Please, choose an email: ");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -208,7 +244,6 @@ public class Menu {
 		addHospitalU(u.getId());
 
 	}
-	
 
 	private static void addPatientU(Integer userId) throws IOException {
 		String aux;
@@ -258,7 +293,7 @@ public class Menu {
 		Patient p = new Patient(patientname, patientgender, patientage, donation_id, medical_history, hospital_id);
 		dbman.addPatient(p);
 	}
-	
+
 	private static void addDonorU(Integer userId) throws IOException {
 		String aux;
 		System.out.println("Please, input the donor info:");
@@ -276,11 +311,11 @@ public class Menu {
 		System.out.print("Medical History id: ");
 		aux = reader.readLine();
 		Integer medical_history = Integer.parseInt(aux);
-		Donor d = new Donor(donorname, donorgender, donorage, donation_id, medical_history,
-				userId);
+		Donor d = new Donor(donorname, donorgender, donorage, donation_id, medical_history, userId);
 		dbman.addDonor(d);
-		
+
 	}
+
 	private static void addDonor() throws Exception {
 		String aux;
 		System.out.println("Please, input the donor info:");
@@ -302,8 +337,8 @@ public class Menu {
 		dbman.addDonor(d);
 
 	}
-	
-	private static void addHosptalU(Integer userId) throws IOException {
+
+	private static void addHospitalU(Integer userId) throws IOException {
 		String aux;
 		System.out.println("Please, input the hospital info:");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -311,9 +346,9 @@ public class Menu {
 		String hospitalname = reader.readLine();
 		System.out.print("City: ");
 		String city = reader.readLine();
-		Hospital h = new Hospital(hospitalname,city,userId);
+		Hospital h = new Hospital(hospitalname, city, userId);
 		dbman.addHospital(h);
-		
+
 	}
 
 	private static void addHospital() throws Exception {
@@ -326,27 +361,26 @@ public class Menu {
 		Hospital h = new Hospital(idname, city);
 		dbman.addHospital(h);
 	}
-		//dbman.connect();
+	// dbman.connect();
 
-		// addPatient();
-		/*
-		 * addDonor(); addHospital(); addDonation(); addMedicalHistory(); addRequest();
-		 * searchDonor();
-		 */
+	// addPatient();
+	/*
+	 * addDonor(); addHospital(); addDonation(); addMedicalHistory(); addRequest();
+	 * searchDonor();
+	 */
 
-		//modifyPatientAge();
+	// modifyPatientAge();
 
-		// addPatient();
-		// addDonor();
-		// addHospital();
-		// addDonation();
-		// addMedicalHistory();
-		// addRequest();
-		// searchDonor();
-		// dbman.printRequests();
-		// deleteRequest();
-		//dbman.disconnect();
-	
+	// addPatient();
+	// addDonor();
+	// addHospital();
+	// addDonation();
+	// addMedicalHistory();
+	// addRequest();
+	// searchDonor();
+	// dbman.printRequests();
+	// deleteRequest();
+	// dbman.disconnect();
 
 	private static void addDonation() throws Exception {
 		System.out.println("Please, input the donation info:");

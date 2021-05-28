@@ -15,6 +15,7 @@
 
 		<properties>	
 			<!-- Connection properties -->
+			<property name="eclipselink.target-database" value="Database" />
 			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
 		    <property name="javax.persistence.jdbc.url"	value="jdbc:sqlite:./db/transplant.db" />
 			<!-- Fill if we need user and password -->

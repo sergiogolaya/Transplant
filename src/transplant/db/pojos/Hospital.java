@@ -1,12 +1,54 @@
 package transplant.db.pojos;
+
+
+import java.io.Serializable;
+import javax.xml.*;
 import java.util.ArrayList;
 import java.util.List;
-
-public class Hospital {
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+@Entity
+@Table(name = "hospital")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="hospital")
+@XmlType(propOrder= {"idname", "city", "patientlist"})
+public class Hospital implements Serializable{
+	
+	private static final long serialVersionUID = 6161233776001447765L;
+	
+	@Id
+	@GeneratedValue(generator="hospital")
+	@TableGenerator(name="hospital", table="sqlite_sequence", 
+	pkColumnName="name", valueColumnName="seq", pkColumnValue= "hospital")
+	@XmlAttribute
 	private String idname;
+	@XmlAttribute
 	private String city;
+	@OneToMany(mappedBy="hospital")
+	@XmlElement(name="")
+	@XmlElementWrapper(name="")
 	private List<Patient> patientlist;
 	private int userId;
+	
 	
 	
 	public Hospital(List<Patient> patientlist, List<Donor> donorlist) {
@@ -19,10 +61,11 @@ public class Hospital {
 		this.idname = idname;
 		this.city = city;
 		this.patientlist = new ArrayList<Patient>();
+		
 	}
 	
 	
-	public Hospital(String idname, String city,int userId) {
+	public Hospital(String idname, String city, int userId) {
 		super();
 		this.idname = idname;
 		this.city = city;
