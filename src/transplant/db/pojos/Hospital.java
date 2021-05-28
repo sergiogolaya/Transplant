@@ -6,6 +6,7 @@ public class Hospital {
 	private String idname;
 	private String city;
 	private List<Patient> patientlist;
+	private int userId;
 	
 	
 	public Hospital(List<Patient> patientlist, List<Donor> donorlist) {
@@ -19,6 +20,16 @@ public class Hospital {
 		this.city = city;
 		this.patientlist = new ArrayList<Patient>();
 	}
+	
+	
+	public Hospital(String idname, String city,int userId) {
+		super();
+		this.idname = idname;
+		this.city = city;
+		this.patientlist = new ArrayList<Patient>();
+		this.userId = userId;
+	}
+
 	public void addPatient(Patient p) {
 		if(!patientlist.contains(p)) {
 			patientlist.add(p);

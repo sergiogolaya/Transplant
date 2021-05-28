@@ -34,6 +34,8 @@ public class User implements Serializable {
 		this.password = password;
 		this.role = role;
 	}
+	
+	
 	public Integer getId() {
 		return id;
 	}

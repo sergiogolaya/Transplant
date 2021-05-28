@@ -19,15 +19,17 @@ public class JPAUserManager implements UserManager {
 
 	@Override
 	public void connect() {
+		
 		em = Persistence.createEntityManagerFactory("user-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 		em.getTransaction().commit();
 		List<Role> existingRoles = this.getRoles();
-		if (existingRoles.size()<2) {
-			this.newRole(new Role("admin"));
-			this.newRole(new Role("user"));
-		}
+		if (existingRoles.size()<3) {
+			this.newRole(new Role("hospital"));
+			this.newRole(new Role("patient"));
+			this.newRole(new Role("donor"));
+			}
 	}
 
 	@Override

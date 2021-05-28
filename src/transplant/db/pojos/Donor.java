@@ -56,6 +56,7 @@ public class Donor implements Serializable{
 	private int mh_id;
 	private int id;
 	private List<Patient> patientlist;
+	private int userId;
 	
 	
 
@@ -85,6 +86,20 @@ public class Donor implements Serializable{
 		this.donation_id = donation_id;
 		this.mh_id = mh_id;
 		this.patientlist = new ArrayList <Patient>();
+	}
+	
+
+	public Donor(String name, String gender, int age, int donation_id, int mh_id, int id,
+			int userId) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.age = age;
+		this.donation_id = donation_id;
+		this.mh_id = mh_id;
+		this.id = id;
+		this.patientlist = new ArrayList <Patient>();
+		this.userId = userId;
 	}
 
 	public void addPatient(Patient p) {
