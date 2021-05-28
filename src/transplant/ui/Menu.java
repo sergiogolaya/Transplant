@@ -307,22 +307,12 @@ public class Menu {
 		String aux;
 		System.out.println("Please, input the hospital info:");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Donor name: ");
-		String donorname = reader.readLine();
-		System.out.print("Gender: ");
-		String donorgender = reader.readLine();
-		System.out.print("Age: ");
-		aux = reader.readLine();
-		Integer donorage = Integer.parseInt(aux);
-		System.out.print("Donation id: ");
-		aux = reader.readLine();
-		Integer donation_id = Integer.parseInt(aux);
-		System.out.print("Medical History id: ");
-		aux = reader.readLine();
-		Integer medical_history = Integer.parseInt(aux);
-		Donor d = new Donor(donorname, donorgender, donorage, donation_id, medical_history,
-				userId);
-		dbman.addDonor(d);
+		System.out.print("Hospital name: ");
+		String hospitalname = reader.readLine();
+		System.out.print("City: ");
+		String city = reader.readLine();
+		Hospital h = new Hospital(hospitalname,city,userId);
+		dbman.addHospital(h);
 		
 	}
 
