@@ -24,39 +24,31 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "donor")
 @XmlType(propOrder = { "name", "gender", "age","donation_id" ,"mh_id","patientlist"  })
- /*@name
-@GeneratedValue(generator="donor")
-@TableGenerator(name="donor", table="sqlite_sequence",
-    pkColumnName="name", valueColumnName="seq", pkColumnValue="departments")
 
-@XmlAttribute
-private String name;
-@XmlElement
-private String gender;
-@XmlElement
-private integer age;
-@XmlElement
-private integer donation_id;
-@XmlElement
-private integer mh_id;
-@OneToMany(mappedBy="department")
-@XmlElement(name = "donor")
-@XmlElementWrapper(name = "donor")
-private List <Patient> patientlist;*/
 
 public class Donor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(generator="donor")
+	@TableGenerator(name="donor", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="departments")
 
+	@XmlAttribute
 	private String name;
+	@XmlElement
 	private String gender;
-	private int age;
-	private int donation_id;
-	private int mh_id;
-	private int id;
-	private List<Patient> patientlist;
-	private int userId;
+	@XmlElement
+	private Integer age;
+	@XmlElement
+	private Integer donation_id;
+	@XmlElement
+	private Integer mh_id;
+	@OneToMany(mappedBy="department")
+	@XmlElement(name = "donor")
+	@XmlElementWrapper(name = "donor")
+	private List <Patient> patientlist;
 	
 	
 
