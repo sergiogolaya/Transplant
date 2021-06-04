@@ -33,15 +33,12 @@ public class Menu {
 
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	
-
-	
-	public static void main(String[] args) throws Exception  {
+	public static void main(String[] args) throws Exception {
 		dbman.connect();
 		userman.connect();
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int option = 0;
-		
+
 		System.out.println("\n");
 		System.out.println("|--------------------------------------------|");
 		System.out.println("|         WELCOME TO SECOND LIFE             |");
@@ -52,9 +49,9 @@ public class Menu {
 		System.out.println("|--------------------------------------------|");
 
 		System.out.println("\n\nPlease introduce an option: ");
-		String aux=console.readLine();
+		String aux = console.readLine();
 
-		option=Integer.parseInt(aux);
+		option = Integer.parseInt(aux);
 		switch (option) {
 		case 1:
 			register();
@@ -74,88 +71,86 @@ public class Menu {
 	}
 
 	private static void register() throws NumberFormatException, IOException, NoSuchAlgorithmException {
-<<<<<<< HEAD
-		
+
 		System.out.println("Specify your profile: 1.Patient  2. Donor   3. Hospital");
-=======
+
 		// TODO Auto-generated method stub
 		System.out.println("|-------------------------|");
 		System.out.println("|  Profile Specification  |");
 		System.out.println("|-------------------------|");
-	    System.out.println("|1.Patient                |");
-	    System.out.println("|2.Donor                  |");
-	    System.out.println("|3.Hospital               |");
+		System.out.println("|1.Patient                |");
+		System.out.println("|2.Donor                  |");
+		System.out.println("|3.Hospital               |");
 		System.out.println("|-------------------------|");
-		
+
 		System.out.println("\n\nPlease, introduce an option: ");
-		
-		
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
+
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int profile = Integer.parseInt(console.readLine());
 
 		switch (profile) {
 		case 1:
-			if(!registerPatient()) System.out.println("\nThe email is not available");
+			if (!registerPatient())
+				System.out.println("\nThe email is not available");
 			break;
 		case 2:
-			if(!registerDonor())System.out.println("\nThe email is not available");
+			if (!registerDonor())
+				System.out.println("\nThe email is not available");
 			break;
 		case 3:
-			if(!registerHospital()) System.out.println("\nThe email is not available");
+			if (!registerHospital())
+				System.out.println("\nThe email is not available");
 			break;
 		}
 	}
 
-	private static void logIn() throws Exception {
+	private static void logIn(){
 		try {
-		
-		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-		
-		System.out.println("Please, introduce your email: ");
-		String email = console.readLine();
-		System.out.println("Please, introduce your password: ");
-		String password = console.readLine();
-		if(userman.checkEmail(email)) {
-			System.out.println("\nThis email is already used ") ;
-		
-		}
-		
-		User u = userman.checkPassword(email, password);
-		
-			
-			
-		if (u.getRole().getName().equalsIgnoreCase("patient")) {
-			patientMenu(u);
-		}
 
-		else if (u.getRole().getName().equalsIgnoreCase("donor")) {
-			donorMenu(u);
-		} else if (u.getRole().getName().equalsIgnoreCase("hospital")) {
-			hospitalMenu(u);
-		}
-		}
-		catch(Exception e) {
+			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+
+			System.out.println("Please, introduce your email: ");
+			String email = console.readLine();
+			System.out.println("Please, introduce your password: ");
+			String password = console.readLine();
+			if (userman.checkEmail(email)) {
+				System.out.println("\nThis email is already used ");
+
+			}
+
+			User u = userman.checkPassword(email, password);
+
+			if (u.getRole().getName().equalsIgnoreCase("patient")) {
+				patientMenu(u);
+			}
+
+			else if (u.getRole().getName().equalsIgnoreCase("donor")) {
+				donorMenu(u);
+			} else if (u.getRole().getName().equalsIgnoreCase("hospital")) {
+				hospitalMenu(u);
+			}
+		} catch (Exception e) {
 			System.out.println("\nIncorrect data input");
-			
+
 		}
 
-}
+	}
 
 	private static void hospitalMenu(User u) throws Exception {
 		int option = 0;
-		
+
 		System.out.println("\n");
 		System.out.println("|-------------------------|");
 		System.out.println("|1.Add patient            |");
 		System.out.println("|2.Add donor              |");
 		System.out.println("|3.Delete request         |");
-		System.out.println("|3.Modify request         |");
-		System.out.println("|5.Exit                   |");
+		System.out.println("|4.Modify patient age     |");
+		System.out.println("|5.Modify donor age       |");
+		System.out.println("|6.Exit                   |");
 		System.out.println("|-------------------------|");
-		
+
 		System.out.println("\n\nPlease, introduce an option: ");
-		
+
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 			option = Integer.parseInt(console.readLine());
@@ -179,9 +174,15 @@ public class Menu {
 
 		case 4:
 			modifyPatientAge();
+			
 			break;
-
+			
 		case 5:
+			modifyDonorAge();
+			break;
+			
+		case 6:
+			System.exit(0);
 			break;
 		}
 
@@ -194,9 +195,9 @@ public class Menu {
 		System.out.println("|1. Check your request        |");
 		System.out.println("|2. Exit                      |");
 		System.out.println("|-----------------------------|");
-		
+
 		System.out.println("\n\nPlease, introduce an option: ");
-		
+
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 			option = Integer.parseInt(console.readLine());
@@ -215,13 +216,13 @@ public class Menu {
 	}
 
 	private static void patientMenu(User u) throws Exception {
-		int option=0;
+		int option = 0;
 		System.out.println("\n");
 		System.out.println("|-----------------------------|");
 		System.out.println("|1.Check your request         |");
 		System.out.println("|2.Exit                       |");
-        System.out.println("|-----------------------------|");
-		
+		System.out.println("|-----------------------------|");
+
 		System.out.println("\n\nPlease, introduce an option: ");
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -243,44 +244,45 @@ public class Menu {
 
 	private static Boolean registerPatient() {
 		try {
-		System.out.println("Please, choose an email: ");
-		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-		String email = console.readLine();
-		System.out.println("Please, choose a password: ");
-		String password = console.readLine();
-		if(userman.checkEmail(email))return false;
-		Role role = userman.getRole(2);
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		md.update(password.getBytes());
-		byte[] hash = md.digest();
-		
-		User u = new User(email, hash, role);
-		userman.newUser(u);
-		addPatientU(u.getId());
-		}
-		catch(Exception e) {
+			System.out.println("Please, choose an email: ");
+			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+			String email = console.readLine();
+			System.out.println("Please, choose a password: ");
+			String password = console.readLine();
+			if (userman.checkEmail(email))
+				return false;
+			Role role = userman.getRole(2);
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] hash = md.digest();
+
+			User u = new User(email, hash, role);
+			userman.newUser(u);
+			addPatientU(u.getId());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-return true;
+		return true;
 	}
 
 	private static Boolean registerDonor() {
-		
-		try{
-		System.out.println("Please, choose an email: ");
-		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-		String email = console.readLine();
-		System.out.println("Please, choose a password: ");
-		String password = console.readLine();
-		if(userman.checkEmail(email))return false;
-		Role role = userman.getRole(3);
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		md.update(password.getBytes());
-		byte[] hash = md.digest();
-		User u = new User(email, hash, role);
-		userman.newUser(u);
-		addDonorU(u.getId());
-		}catch(Exception e) {
+
+		try {
+			System.out.println("Please, choose an email: ");
+			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+			String email = console.readLine();
+			System.out.println("Please, choose a password: ");
+			String password = console.readLine();
+			if (userman.checkEmail(email))
+				return false;
+			Role role = userman.getRole(3);
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] hash = md.digest();
+			User u = new User(email, hash, role);
+			userman.newUser(u);
+			addDonorU(u.getId());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return true;
@@ -288,20 +290,21 @@ return true;
 
 	private static Boolean registerHospital() {
 		try {
-		System.out.println("Please, choose an email: ");
-		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-		String email = console.readLine();
-		System.out.println("Please, choose a password: ");
-		String password = console.readLine();
-		if(userman.checkEmail(email))return false;
-		Role role = userman.getRole(1);
-		MessageDigest md = MessageDigest.getInstance("MD5");
-		md.update(password.getBytes());
-		byte[] hash = md.digest();
-		User u = new User(email, hash, role);
-		userman.newUser(u);
-		addHospitalU(u.getId());
-		}catch(Exception e) {
+			System.out.println("Please, choose an email: ");
+			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+			String email = console.readLine();
+			System.out.println("Please, choose a password: ");
+			String password = console.readLine();
+			if (userman.checkEmail(email))
+				return false;
+			Role role = userman.getRole(1);
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] hash = md.digest();
+			User u = new User(email, hash, role);
+			userman.newUser(u);
+			addHospitalU(u.getId());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return true;
@@ -423,11 +426,7 @@ return true;
 		Hospital h = new Hospital(idname, city);
 		dbman.addHospital(h);
 	}
-	
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 	private static void addDonation() throws Exception {
 		System.out.println("Please, input the donation info:");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -521,6 +520,17 @@ return true;
 		String aux = reader.readLine();
 		Integer newAge = Integer.parseInt(aux);
 		dbman.modifyPatient(id, newAge);
+		System.out.println("Update finished.");
+	}
+	private static void modifyDonorAge() throws Exception {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Choose a donor, type its id: ");
+		dbman.printRequests();
+		Integer id = Integer.parseInt(reader.readLine());
+		System.out.print("Type the new age of the patient: ");
+		String aux = reader.readLine();
+		Integer newAge = Integer.parseInt(aux);
+		dbman.modifyDonor(id, newAge);
 		System.out.println("Update finished.");
 	}
 

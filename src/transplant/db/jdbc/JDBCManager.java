@@ -266,6 +266,20 @@ public class JDBCManager implements DBManager {
 		}
 
 	}
+	public void modifyDonor(Integer id, Integer newAge) {
+		try {
+
+			String sql = "UPDATE donor SET age=? WHERE id=?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, newAge);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	public void deleteRequest(int patient_id, int donor_id) {
 		
