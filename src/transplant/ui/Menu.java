@@ -42,11 +42,25 @@ public class Menu {
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int option = 0;
 		String aux;
+<<<<<<< HEAD
 		System.out.println("\n\n         WELCOME TO SECOND LIFE\n\n");
 		System.out.println("\n1.Register");
 		System.out.println("\n2. Log in");
 		System.out.println("\n3. Exit");
 		System.out.println("\nIntroduce your option: ");
+=======
+		System.out.println("\n");
+		System.out.println("|--------------------------------------------|");
+		System.out.println("|         WELCOME TO SECOND LIFE             |");
+		System.out.println("|--------------------------------------------|");
+		System.out.println("|1.Register                                  |");
+		System.out.println("|2.Log in                                    |");
+		System.out.println("|3.Exit                                      |");
+		System.out.println("|--------------------------------------------|");
+		
+		System.out.println("\n\nPlease introduce an option: ");
+		
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 		aux=console.readLine();
 		option=Integer.parseInt(aux);
 		switch (option) {
@@ -110,12 +124,18 @@ public class Menu {
 	private static void hospitalMenu(User u) throws Exception {
 		// TODO Auto-generated method stub
 		int option = 0;
-		System.out.println("\nChoose an option: ");
-		System.out.print("\n1.Add patient");
-		System.out.print("\n2.Add donor");
-		System.out.print("\n3.Delete request");
-		System.out.print("\n3.Modify request");
-		System.out.print("\n5.Exit");
+		
+		System.out.println("\n");
+		System.out.println("|-------------------------|");
+		System.out.println("|1.Add patient            |");
+		System.out.println("|2.Add donor              |");
+		System.out.println("|3.Delete request         |");
+		System.out.println("|3.Modify request         |");
+		System.out.println("|5.Exit                   |");
+		System.out.println("|-------------------------|");
+		
+		System.out.println("\n\nPlease introduce an option: ");
+		
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 			option = Integer.parseInt(console.readLine());
@@ -150,9 +170,14 @@ public class Menu {
 	private static void donorMenu(User u) throws Exception {
 		// TODO Auto-generated method stub
 		int option = 0;
-		System.out.println("\nChoose an option: ");
-		System.out.println("\n1. Check your request");
-		System.out.println("\n2. Exit");
+		System.out.println("\n");
+		System.out.println("|-----------------------------|");
+		System.out.println("|1. Check your request        |");
+		System.out.println("|2. Exit                      |");
+		System.out.println("|-----------------------------|");
+		
+		System.out.println("\n\nPlease introduce an option: ");
+		
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 			option = Integer.parseInt(console.readLine());
