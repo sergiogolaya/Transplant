@@ -50,9 +50,13 @@ public class Menu {
 		System.out.println("|2.Log in                                    |");
 		System.out.println("|3.Exit                                      |");
 		System.out.println("|--------------------------------------------|");
+
 		System.out.println("\n\nPlease introduce an option: ");
 		String aux=console.readLine();
-		option=Integer.parseInt(aux);
+		
+		deleteRequest();
+
+		//option=Integer.parseInt(aux);
 		switch (option) {
 		case 1:
 			register();
@@ -72,34 +76,51 @@ public class Menu {
 	}
 
 	private static void register() throws NumberFormatException, IOException, NoSuchAlgorithmException {
-		// TODO Auto-generated method stub
-		System.out.println("Specify your profile: 1.Patient  2. Donor   3. Hospital");
+
+		System.out.println("|-------------------------|");
+		System.out.println("|  Profile Specification  |");
+		System.out.println("|-------------------------|");
+	    System.out.println("|1.Patient                |");
+	    System.out.println("|2.Donor                  |");
+	    System.out.println("|3.Hospital               |");
+		System.out.println("|-------------------------|");
+		
+		System.out.println("\n\nPlease, introduce an option: ");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int profile = Integer.parseInt(console.readLine());
 
 		switch (profile) {
 		case 1:
-			registerPatient();
+			if(!registerPatient()) System.out.println("\nThe email is not available");
 			break;
 		case 2:
-			registerDonor();
+			if(!registerDonor())System.out.println("\nThe email is not available");
 			break;
 		case 3:
-			registerHospital();
+			if(!registerHospital()) System.out.println("\nThe email is not available");
 			break;
 		}
 	}
 
 	private static void logIn() throws Exception {
+		try {
+		
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+		
 		System.out.println("Please, introduce your email: ");
 		String email = console.readLine();
 		System.out.println("Please, introduce your password: ");
 		String password = console.readLine();
+		if(userman.checkEmail(email)) {
+			System.out.println("\nThis email is already used ") ;
+		
+		}
+		
 		User u = userman.checkPassword(email, password);
-		if (u == null) {
-			System.out.println("Wrong email or password");
-		} else if (u.getRole().getName().equalsIgnoreCase("patient")) {
+		
+			
+			
+		if (u.getRole().getName().equalsIgnoreCase("patient")) {
 			patientMenu(u);
 		}
 
@@ -108,11 +129,15 @@ public class Menu {
 		} else if (u.getRole().getName().equalsIgnoreCase("hospital")) {
 			hospitalMenu(u);
 		}
+		}
+		catch(Exception e) {
+			System.out.println("\nIncorrect data input");
+			
+		}
 
-	}
+}
 
 	private static void hospitalMenu(User u) throws Exception {
-		// TODO Auto-generated method stub
 		int option = 0;
 		
 		System.out.println("\n");
@@ -124,7 +149,7 @@ public class Menu {
 		System.out.println("|5.Exit                   |");
 		System.out.println("|-------------------------|");
 		
-		System.out.println("\n\nPlease introduce an option: ");
+		System.out.println("\n\nPlease, introduce an option: ");
 		
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -158,7 +183,6 @@ public class Menu {
 	}
 
 	private static void donorMenu(User u) throws Exception {
-		// TODO Auto-generated method stub
 		int option = 0;
 		System.out.println("\n");
 		System.out.println("|-----------------------------|");
@@ -166,7 +190,7 @@ public class Menu {
 		System.out.println("|2. Exit                      |");
 		System.out.println("|-----------------------------|");
 		
-		System.out.println("\n\nPlease introduce an option: ");
+		System.out.println("\n\nPlease, introduce an option: ");
 		
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -186,11 +210,14 @@ public class Menu {
 	}
 
 	private static void patientMenu(User u) throws Exception {
-		// TODO Auto-generated method stub
 		int option=0;
-		System.out.println("\nChoose an option: ");
-		System.out.println("\n1. Check your request");
-		System.out.println("\n2. Exit");
+		System.out.println("\n");
+		System.out.println("|-----------------------------|");
+		System.out.println("|1.Check your request         |");
+		System.out.println("|2.Exit                       |");
+        System.out.println("|-----------------------------|");
+		
+		System.out.println("\n\nPlease, introduce an option: ");
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 			option = Integer.parseInt(console.readLine());
@@ -209,28 +236,38 @@ public class Menu {
 
 	}
 
-	private static void registerPatient() throws IOException, NoSuchAlgorithmException {
+	private static Boolean registerPatient() {
+		try {
 		System.out.println("Please, choose an email: ");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		String email = console.readLine();
 		System.out.println("Please, choose a password: ");
 		String password = console.readLine();
+		if(userman.checkEmail(email))return false;
 		Role role = userman.getRole(2);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
 		byte[] hash = md.digest();
+		
 		User u = new User(email, hash, role);
 		userman.newUser(u);
 		addPatientU(u.getId());
-
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+return true;
 	}
 
-	private static void registerDonor() throws IOException, NoSuchAlgorithmException {
+	private static Boolean registerDonor() {
+		
+		try{
 		System.out.println("Please, choose an email: ");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		String email = console.readLine();
 		System.out.println("Please, choose a password: ");
 		String password = console.readLine();
+		if(userman.checkEmail(email))return false;
 		Role role = userman.getRole(3);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
@@ -238,15 +275,20 @@ public class Menu {
 		User u = new User(email, hash, role);
 		userman.newUser(u);
 		addDonorU(u.getId());
-
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 
-	private static void registerHospital() throws IOException, NoSuchAlgorithmException {
+	private static Boolean registerHospital() {
+		try {
 		System.out.println("Please, choose an email: ");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		String email = console.readLine();
 		System.out.println("Please, choose a password: ");
 		String password = console.readLine();
+		if(userman.checkEmail(email))return false;
 		Role role = userman.getRole(1);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
@@ -254,6 +296,10 @@ public class Menu {
 		User u = new User(email, hash, role);
 		userman.newUser(u);
 		addHospitalU(u.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return true;
 
 	}
 
@@ -351,7 +397,6 @@ public class Menu {
 	}
 
 	private static void addHospitalU(Integer userId) throws IOException {
-		String aux;
 		System.out.println("Please, input the hospital info:");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("Hospital name: ");
@@ -373,27 +418,7 @@ public class Menu {
 		Hospital h = new Hospital(idname, city);
 		dbman.addHospital(h);
 	}
-	// dbman.connect();
-
-	// addPatient();
-	/*
-	 * addDonor(); addHospital(); addDonation(); addMedicalHistory(); addRequest();
-	 * searchDonor();
-	 */
-
-	// modifyPatientAge();
-
-	// addPatient();
-	// addDonor();
-	// addHospital();
-	// addDonation();
-	// addMedicalHistory();
-	// addRequest();
-	// searchDonor();
-	// dbman.printRequests();
-	// deleteRequest();
-	// dbman.disconnect();
-
+	
 	private static void addDonation() throws Exception {
 		System.out.println("Please, input the donation info:");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -437,17 +462,22 @@ public class Menu {
 		dbman.addRequest(r);
 	}
 
-	private static void deleteRequest() throws Exception {
+	private static void deleteRequest()  {
+		try {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		dbman.printRequests();
-		System.out.println("Please, input the patient request id:");
+		System.out.println("Please, input the patient's id:");
 		String aux = reader.readLine();
 		Integer p_id = Integer.parseInt(aux);
-		System.out.println("Please, input the donor request id:");
+		System.out.println("Please, input the donor's id:");
 		aux = reader.readLine();
 		Integer d_id = Integer.parseInt(aux);
 		dbman.deleteRequest(p_id, d_id);
-		dbman.printRequests();
+		System.out.println("The request has been deleted");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void searchPatient() throws Exception {

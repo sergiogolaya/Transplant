@@ -25,7 +25,10 @@ import java.util.List;
 public class Donor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@Id
+	@GeneratedValue(generator="donor")
+	@TableGenerator(name="donor", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="gender", pkColumnValue="departments")
 	private Integer id;
 	@XmlAttribute
 	private String name;

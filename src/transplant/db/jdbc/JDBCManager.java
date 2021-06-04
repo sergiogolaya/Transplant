@@ -75,10 +75,10 @@ public class JDBCManager implements DBManager {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+			e.printStackTrace();
 		}
+
+	}
 
 	public void deletePatient(int patient_id) {
 		try {
@@ -146,7 +146,6 @@ public class JDBCManager implements DBManager {
 		}
 	}
 
-	
 	public void addHospital(Hospital h) {
 		try {
 			String sql = "INSERT INTO hospital (id,city) VALUES (?, ?)";
@@ -251,7 +250,7 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void modifyPatient(Integer id, Integer newAge) {
 		try {
 
@@ -267,11 +266,13 @@ public class JDBCManager implements DBManager {
 
 	}
 
-	public void deleteRequest(int patient_id, int donor_id) {
-		
+	@Override
+	public void deleteRequest(Integer patient_id, Integer donor_id) {
+
+		String sql = "DELETE FROM request WHERE patient_id = ? AND donor_id = ?";
+		PreparedStatement prep;
 		try {
-			String sql = "DELETE FROM request WHERE patient_id = ? AND donor_id = ?";
-			PreparedStatement prep = c.prepareStatement(sql);
+			prep = c.prepareStatement(sql);
 			prep.setInt(1, patient_id);
 			prep.setInt(2, donor_id);
 			prep.executeUpdate();
@@ -341,12 +342,6 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 
-	}
-
-	@Override
-	public void deleteRequest(Integer patient_id, Integer donor_id) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
