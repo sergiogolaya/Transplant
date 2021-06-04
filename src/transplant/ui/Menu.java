@@ -51,7 +51,7 @@ public class Menu {
 		System.out.println("|3.Exit                                      |");
 		System.out.println("|--------------------------------------------|");
 		
-		System.out.println("\n\nPlease introduce an option: ");
+		System.out.println("\n\nPlease, introduce an option: ");
 		
 		aux=console.readLine();
 		option=Integer.parseInt(aux);
@@ -75,7 +75,17 @@ public class Menu {
 
 	private static void register() throws NumberFormatException, IOException, NoSuchAlgorithmException {
 		// TODO Auto-generated method stub
-		System.out.println("Specify your profile: 1.Patient  2. Donor   3. Hospital");
+		System.out.println("|-------------------------|");
+		System.out.println("|  Profile Specification  |");
+		System.out.println("|-------------------------|");
+	    System.out.println("|1.Patient                |");
+	    System.out.println("|2.Donor                  |");
+	    System.out.println("|3.Hospital               |");
+		System.out.println("|-------------------------|");
+		
+		System.out.println("\n\nPlease, introduce an option: ");
+		
+		
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int profile = Integer.parseInt(console.readLine());
 
@@ -126,7 +136,7 @@ public class Menu {
 		System.out.println("|5.Exit                   |");
 		System.out.println("|-------------------------|");
 		
-		System.out.println("\n\nPlease introduce an option: ");
+		System.out.println("\n\nPlease, introduce an option: ");
 		
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -168,7 +178,7 @@ public class Menu {
 		System.out.println("|2. Exit                      |");
 		System.out.println("|-----------------------------|");
 		
-		System.out.println("\n\nPlease introduce an option: ");
+		System.out.println("\n\nPlease, introduce an option: ");
 		
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -190,9 +200,13 @@ public class Menu {
 	private static void patientMenu(User u) throws Exception {
 		// TODO Auto-generated method stub
 		int option=0;
-		System.out.println("\nChoose an option: ");
-		System.out.println("\n1. Check your request");
-		System.out.println("\n2. Exit");
+		System.out.println("\n");
+		System.out.println("|-----------------------------|");
+		System.out.println("|1.Check your request         |");
+		System.out.println("|2.Exit                       |");
+        System.out.println("|-----------------------------|");
+		
+		System.out.println("\n\nPlease, introduce an option: ");
 		try {
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 			option = Integer.parseInt(console.readLine());
