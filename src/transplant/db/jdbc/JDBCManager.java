@@ -75,7 +75,6 @@ public class JDBCManager implements DBManager {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			//if(!e.getMessage().contains("Already exist")) {
 				e.printStackTrace();
 			}
 
@@ -107,10 +106,6 @@ public class JDBCManager implements DBManager {
 
 	public void addPatient(Patient p) {
 		try {
-
-			// TODO TENDREMOS QUE HACER UN METODO QUE INTRODUZCA EL ID DE ORGAN QUE COINCIDE
-			// CON EL DE DONOR Y HACER INSERT PARA QUE LO GUARDE EN LA TABLA
-			// Get the employee info from the command prompt
 
 			String sql = "INSERT INTO patient (name, gender, age, organ_ID, MH_ID, H_ID) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -151,6 +146,7 @@ public class JDBCManager implements DBManager {
 		}
 	}
 
+	
 	public void addHospital(Hospital h) {
 		try {
 			String sql = "INSERT INTO hospital (id,city) VALUES (?, ?)";
