@@ -49,33 +49,41 @@ public class JDBCManager implements DBManager {
 					+ "gender TEXT NOT NULL," + "age INTEGER NOT NULL," + "organ_ID INTEGER NOT NULL,"
 					+ "MH_ID INTEGER NOT NULL," + "H_ID INTEGER NOT NULL)";
 			stm1.executeUpdate(sql1);
-
-			sql1 = "CREATE TABLE donor" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
+			stm1.close();
+			
+			Statement stm2=c.createStatement();
+			String sql2 = "CREATE TABLE donor" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 					+ "gender TEXT NOT NULL," + "age INTEGER NOT NULL," + "organ_ID INTEGER NOT NULL,"
 					+ "MH_ID INTEGER NOT NULL)";
-			stm1.executeUpdate(sql1);
-
-			sql1 = "CREATE TABLE hospital" + "(id TEXT PRIMARY KEY ," + "city TEXT NOT NULL)";
-
-			stm1.executeUpdate(sql1);
-			sql1 = "CREATE TABLE donation " + "(type TEXT NOT NULL," + "name TEXT NOT NULL)";
-
-			stm1.executeUpdate(sql1);
-
-			sql1 = "CREATE TABLE MH " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "blood_type TEXT,"
+			stm2.executeUpdate(sql2);
+			stm2.close();
+			
+			Statement stm3=c.createStatement();
+			String sql3 = "CREATE TABLE hospital" + "(id TEXT PRIMARY KEY ," + "city TEXT NOT NULL)";
+			stm3.executeUpdate(sql3);
+			stm3.close();
+			
+			Statement stm4=c.createStatement();
+			String sql4 = "CREATE TABLE donation " + "(type TEXT NOT NULL," + "name TEXT NOT NULL)";
+			stm4.executeUpdate(sql4);
+			stm4.close();
+			
+			Statement stm5=c.createStatement();
+			String sql5 = "CREATE TABLE MH " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "blood_type TEXT,"
 					+ "p_illnesses TEXT," + "a_illnesses TEXT," + "date DATE)";
-
-			stm1.executeUpdate(sql1);
-
-			sql1 = "CREATE TABLE request" + "(patient_id INTEGER," + "donor_id INTEGER,"
+			stm5.executeUpdate(sql5);
+			stm5.close();
+			
+			
+			Statement stm6=c.createStatement();
+			String sql6 = "CREATE TABLE request" + "(patient_id INTEGER," + "donor_id INTEGER,"
 					+ "PRIMARY KEY(patient_id, donor_id))";
 
-			stm1.executeUpdate(sql1);
-			stm1.close();
+			stm6.executeUpdate(sql6);
+			stm6.close();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-				e.printStackTrace();
+			
 			}
 
 		}
