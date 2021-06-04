@@ -24,6 +24,7 @@ public interface DBManager {
 	public List<Donor> searchDonorById(Integer id);
 	public void printRequests();
 	public void modifyPatient(Integer id, Integer newAge);
+	public void modifyDonor(Integer id, Integer newAge);
 	public void deleteRequest(Integer patient_id, Integer donor_id);
 
 	
