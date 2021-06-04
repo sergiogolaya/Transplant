@@ -51,7 +51,6 @@ public class Menu {
 		System.out.println("\n\nPlease introduce an option: ");
 		String aux=console.readLine();
 		option=Integer.parseInt(aux);
-        option = Integer.parseInt(aux);
 		switch (option) {
 		case 1:
 			register();
