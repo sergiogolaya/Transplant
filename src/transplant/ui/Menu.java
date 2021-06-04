@@ -49,9 +49,8 @@ public class Menu {
 		System.out.println("|--------------------------------------------|");
 
 		System.out.println("\n\nPlease introduce an option: ");
-		String aux = console.readLine();
-
-		option = Integer.parseInt(aux);
+		String aux=console.readLine();
+		option=Integer.parseInt(aux);
 		switch (option) {
 		case 1:
 			register();
@@ -72,9 +71,8 @@ public class Menu {
 
 	private static void register() throws NumberFormatException, IOException, NoSuchAlgorithmException {
 
-		System.out.println("Specify your profile: 1.Patient  2. Donor   3. Hospital");
 
-		// TODO Auto-generated method stub
+		System.out.println("Specify your profile: 1.Patient  2. Donor   3. Hospital");
 		System.out.println("|-------------------------|");
 		System.out.println("|  Profile Specification  |");
 		System.out.println("|-------------------------|");
@@ -84,7 +82,6 @@ public class Menu {
 		System.out.println("|-------------------------|");
 
 		System.out.println("\n\nPlease, introduce an option: ");
-
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int profile = Integer.parseInt(console.readLine());
 
@@ -426,7 +423,7 @@ public class Menu {
 		Hospital h = new Hospital(idname, city);
 		dbman.addHospital(h);
 	}
-
+	
 	private static void addDonation() throws Exception {
 		System.out.println("Please, input the donation info:");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -470,17 +467,22 @@ public class Menu {
 		dbman.addRequest(r);
 	}
 
-	private static void deleteRequest() throws Exception {
+	private static void deleteRequest()  {
+		try {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		dbman.printRequests();
-		System.out.println("Please, input the patient request id:");
+		System.out.println("Please, input the patient's id:");
 		String aux = reader.readLine();
 		Integer p_id = Integer.parseInt(aux);
-		System.out.println("Please, input the donor request id:");
+		System.out.println("Please, input the donor's id:");
 		aux = reader.readLine();
 		Integer d_id = Integer.parseInt(aux);
 		dbman.deleteRequest(p_id, d_id);
-		dbman.printRequests();
+		System.out.println("The request has been deleted");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void searchPatient() throws Exception {

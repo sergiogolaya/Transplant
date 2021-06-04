@@ -83,10 +83,17 @@ public class JDBCManager implements DBManager {
 			stm6.close();
 
 		} catch (SQLException e) {
+<<<<<<< HEAD
 			
 			}
 
+=======
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 		}
+
+	}
 
 	public void deletePatient(int patient_id) {
 		try {
@@ -154,7 +161,6 @@ public class JDBCManager implements DBManager {
 		}
 	}
 
-	
 	public void addHospital(Hospital h) {
 		try {
 			String sql = "INSERT INTO hospital (id,city) VALUES (?, ?)";
@@ -259,7 +265,7 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void modifyPatient(Integer id, Integer newAge) {
 		try {
 
@@ -288,12 +294,20 @@ public class JDBCManager implements DBManager {
 		}
 
 	}
+<<<<<<< HEAD
 @Override
 	public void deleteRequest(Integer patient_id, Integer donor_id) {
 		
+=======
+
+	@Override
+	public void deleteRequest(Integer patient_id, Integer donor_id) {
+
+		String sql = "DELETE FROM request WHERE patient_id = ? AND donor_id = ?";
+		PreparedStatement prep;
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 		try {
-			String sql = "DELETE FROM request WHERE patient_id = ? AND donor_id = ?";
-			PreparedStatement prep = c.prepareStatement(sql);
+			prep = c.prepareStatement(sql);
 			prep.setInt(1, patient_id);
 			prep.setInt(2, donor_id);
 			prep.executeUpdate();
@@ -365,9 +379,12 @@ public class JDBCManager implements DBManager {
 
 	}
 
+<<<<<<< HEAD
 	
 	
 	
 	
 	
+=======
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 }
