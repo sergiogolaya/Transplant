@@ -50,15 +50,10 @@ public class Menu {
 		System.out.println("|2.Log in                                    |");
 		System.out.println("|3.Exit                                      |");
 		System.out.println("|--------------------------------------------|");
-<<<<<<< HEAD
-		
-		System.out.println("\n\nPlease, introduce an option: ");
-		
-		aux=console.readLine();
-=======
+
 		System.out.println("\n\nPlease introduce an option: ");
 		String aux=console.readLine();
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant
+
 		option=Integer.parseInt(aux);
 		switch (option) {
 		case 1:
@@ -129,7 +124,6 @@ public class Menu {
 	}
 
 	private static void hospitalMenu(User u) throws Exception {
-		// TODO Auto-generated method stub
 		int option = 0;
 		
 		System.out.println("\n");
@@ -175,7 +169,6 @@ public class Menu {
 	}
 
 	private static void donorMenu(User u) throws Exception {
-		// TODO Auto-generated method stub
 		int option = 0;
 		System.out.println("\n");
 		System.out.println("|-----------------------------|");
@@ -203,7 +196,6 @@ public class Menu {
 	}
 
 	private static void patientMenu(User u) throws Exception {
-		// TODO Auto-generated method stub
 		int option=0;
 		System.out.println("\n");
 		System.out.println("|-----------------------------|");
@@ -372,7 +364,6 @@ public class Menu {
 	}
 
 	private static void addHospitalU(Integer userId) throws IOException {
-		String aux;
 		System.out.println("Please, input the hospital info:");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.print("Hospital name: ");
@@ -394,27 +385,7 @@ public class Menu {
 		Hospital h = new Hospital(idname, city);
 		dbman.addHospital(h);
 	}
-	// dbman.connect();
-
-	// addPatient();
-	/*
-	 * addDonor(); addHospital(); addDonation(); addMedicalHistory(); addRequest();
-	 * searchDonor();
-	 */
-
-	// modifyPatientAge();
-
-	// addPatient();
-	// addDonor();
-	// addHospital();
-	// addDonation();
-	// addMedicalHistory();
-	// addRequest();
-	// searchDonor();
-	// dbman.printRequests();
-	// deleteRequest();
-	// dbman.disconnect();
-
+	
 	private static void addDonation() throws Exception {
 		System.out.println("Please, input the donation info:");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
