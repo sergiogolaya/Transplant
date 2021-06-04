@@ -280,8 +280,8 @@ public class JDBCManager implements DBManager {
 		}
 
 	}
-
-	public void deleteRequest(int patient_id, int donor_id) {
+@Override
+	public void deleteRequest(Integer patient_id, Integer donor_id) {
 		
 		try {
 			String sql = "DELETE FROM request WHERE patient_id = ? AND donor_id = ?";
@@ -357,11 +357,8 @@ public class JDBCManager implements DBManager {
 
 	}
 
-	@Override
-	public void deleteRequest(Integer patient_id, Integer donor_id) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
 	
 	
 	
