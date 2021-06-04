@@ -2,7 +2,6 @@ package transplant.db.pojos;
 
 import java.io.Serializable;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,22 +18,15 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "donor")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "donor")
-@XmlType(propOrder = { "name", "gender", "age","donation_id" ,"mh_id","patientlist"  })
+@XmlType(propOrder = { "name", "gender", "age", "donation_id", "mh_id", "patientlist" })
 
-
-public class Donor implements Serializable{
+public class Donor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(generator="donor")
-	@TableGenerator(name="donor", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="departments")
-
+	private Integer id;
 	@XmlAttribute
 	private String name;
 	@XmlElement
@@ -45,19 +37,15 @@ public class Donor implements Serializable{
 	private Integer donation_id;
 	@XmlElement
 	private Integer mh_id;
-	@OneToMany(mappedBy="department")
 	@XmlElement(name = "donor")
-	@XmlElementWrapper(name = "donor")
-	private List <Patient> patientlist;
-	
-	
-
+	private List<Patient> patientlist;
+	private Integer userId;
 
 	public Donor(List<Patient> patientlist) {
 		super();
 		this.patientlist = new ArrayList<Patient>();
 	}
-	
+
 	public Donor(String name, String gender, int age, int donation_id, int mh_id, int id) {
 		super();
 		this.name = name;
@@ -69,7 +57,6 @@ public class Donor implements Serializable{
 		this.patientlist = new ArrayList<Patient>();
 	}
 
-	
 	public Donor(String name, String gender, int age, int donation_id, int mh_id) {
 		super();
 		this.name = name;
@@ -77,12 +64,10 @@ public class Donor implements Serializable{
 		this.age = age;
 		this.donation_id = donation_id;
 		this.mh_id = mh_id;
-		this.patientlist = new ArrayList <Patient>();
+		this.patientlist = new ArrayList<Patient>();
 	}
-	
 
-	public Donor(String name, String gender, int age, int donation_id, int mh_id, int id,
-			int userId) {
+	public Donor(String name, String gender, int age, int donation_id, int mh_id, int id, int userId) {
 		super();
 		this.name = name;
 		this.gender = gender;
@@ -90,7 +75,7 @@ public class Donor implements Serializable{
 		this.donation_id = donation_id;
 		this.mh_id = mh_id;
 		this.id = id;
-		this.patientlist = new ArrayList <Patient>();
+		this.patientlist = new ArrayList<Patient>();
 		this.userId = userId;
 	}
 

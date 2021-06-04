@@ -45,29 +45,29 @@ public class JDBCManager implements DBManager {
 
 			Statement stm1 = c.createStatement();
 
-			String sql1 = "CREATE TABLE patient( " + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
+			String sql1 = "CREATE TABLE patient " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 					+ "gender TEXT NOT NULL," + "age INTEGER NOT NULL," + "organ_ID INTEGER NOT NULL,"
 					+ "MH_ID INTEGER NOT NULL," + "H_ID INTEGER NOT NULL)";
 			stm1.executeUpdate(sql1);
 
-			sql1 = "CREATE TABLE donor( " + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
+			sql1 = "CREATE TABLE donor" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 					+ "gender TEXT NOT NULL," + "age INTEGER NOT NULL," + "organ_ID INTEGER NOT NULL,"
 					+ "MH_ID INTEGER NOT NULL)";
 			stm1.executeUpdate(sql1);
 
-			sql1 = "CREATE TABLE hospital( " + "id TEXT PRIMARY KEY ," + "city TEXT NOT NULL)";
+			sql1 = "CREATE TABLE hospital" + "(id TEXT PRIMARY KEY ," + "city TEXT NOT NULL)";
 
 			stm1.executeUpdate(sql1);
-			sql1 = "CREATE TABLE donation( " + "type TEXT NOT NULL," + "name TEXT NOT NULL)";
+			sql1 = "CREATE TABLE donation " + "(type TEXT NOT NULL," + "name TEXT NOT NULL)";
 
 			stm1.executeUpdate(sql1);
 
-			sql1 = "CREATE TABLE MH (" + "id INTEGER PRIMARY KEY AUTOINCREMENT," + "blood_type TEXT,"
+			sql1 = "CREATE TABLE MH " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "blood_type TEXT,"
 					+ "p_illnesses TEXT," + "a_illnesses TEXT," + "date DATE)";
 
 			stm1.executeUpdate(sql1);
 
-			sql1 = "CREATE TABLE request(" + "patient_id INTEGER," + "donor_id INTEGER,"
+			sql1 = "CREATE TABLE request" + "(patient_id INTEGER," + "donor_id INTEGER,"
 					+ "PRIMARY KEY(patient_id, donor_id))";
 
 			stm1.executeUpdate(sql1);
@@ -75,11 +75,11 @@ public class JDBCManager implements DBManager {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//if(!e.getMessage().contains("Already exist")) {
+				e.printStackTrace();
+			}
 
 		}
-
-	}
 
 	public void deletePatient(int patient_id) {
 		try {

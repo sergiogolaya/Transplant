@@ -26,28 +26,20 @@ import java.io.*;
 
 
 
-@Entity
-@Table(name="donation")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="hospital")
+@XmlRootElement(name="donation")
 @XmlType(propOrder= {"id", "name", "type", "donationlist"})
 public class Donation implements Serializable {
 	
 	
 	private static final long serialVersionUID = -7136704596476565650L;
-	@Id
-	@GeneratedValue(generator="donation")
-	@TableGenerator(name="donation", table="sqlite_sequence", 
-	pkColumnName="name", valueColumnName="seq", pkColumnValue="donation")
 	@XmlAttribute
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String name;
-	@XmlAttribute
+	@XmlElement
 	private String type;
-	@OneToMany(mappedBy="donation")
-	@XmlElement(name="")
-	@XmlElementWrapper(name="")
+	@XmlElement(name="donation")
 	private List<Donation> donationlist;
 	
 	public Donation(Integer id, String name, String type) {

@@ -18,7 +18,7 @@ public class Role implements Serializable {
 	@Id
 	@GeneratedValue(generator="roles")
 	@TableGenerator(name="roles", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="roles")
+	    pkColumnName="name", valueColumnName="seq", pkColumnValue="roles") //line 18-21 only for user&role, not for the other pojos
 	private Integer id;
 	private String name;
 	@OneToMany(mappedBy="role")

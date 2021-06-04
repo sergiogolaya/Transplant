@@ -23,8 +23,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
-@Entity
-@Table(name="MH")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="MH")
 @XmlType(propOrder= {"id", "bloodtype", "previous_I", "actual_I", "date"})
@@ -32,20 +31,18 @@ public class M_h implements Serializable{
 	
 	private static final long serialVersionUID = 7968504404923845972L;
 		
-	@Id
-	@GeneratedValue(generator="MH")
-    @TableGenerator(name="MH", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq", pkColumnValue="MH")
-	    @XmlAttribute
+	
+	    @XmlElement
 		private Integer id;
-	    @XmlAttribute
+	    @XmlElement
 		private String bloodtype;
-	    @XmlAttribute
+	    @XmlElement
 		private String previous_I;
-	    @XmlAttribute
+	    @XmlElement
 		private String actual_I;
-	    @XmlAttribute
+	    @XmlElement
 		private Date date;
+	    //@XmlElement(name = "MH")
 		
 		public M_h(Integer id, String bloodtype, String previous_I, String actual_I, Date date) {
 			super();

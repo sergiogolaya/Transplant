@@ -24,39 +24,31 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-@Entity
-@Table(name = "patients")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "Patient")
-@XmlType(propOrder = { "gender", "age", "donation_id", "mh_id", "h_id" })
+@XmlRootElement(name = "patient")
+@XmlType(propOrder = { "name","gender", "age", "donation_id", "mh_id", "h_id" })
 
 public class Patient implements Serializable {
 	private static final long serialVersionUID = 3915252998504410580L;
 
-	@Id
-	@GeneratedValue(generator = "patients")
-	@TableGenerator(name = "patients", table = "sqlite_sequence", pkColumnName = "name", valueColumnName = "seq", pkColumnValue = "employees")
 	@XmlAttribute
 	private Integer id;
-	@XmlAttribute
+	@XmlElement
 	private String name;
-	@XmlAttribute
+	@XmlElement
 	private String gender;
-	@XmlAttribute
+	@XmlElement
 	private Integer age;
-	@XmlAttribute
+	@XmlElement
 	private Integer donation_id;
-	@XmlAttribute
+	@XmlElement
 	private Integer mh_id;
-	@XmlAttribute
+	@XmlElement
 	private String h_id;
+	@XmlElement(name = "patient")
 	@XmlAttribute
-	@ManyToMany(mappedBy = "authors")
-	@XmlTransient
 	private List<Donor> donorlist;
 	@XmlElement
-	@ManyToOne(fetch = FetchType.LAZY)
-	@XmlTransient
 	private List<Donation> donationlist;
 	private Integer userId;
 

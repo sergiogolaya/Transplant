@@ -26,8 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-@Entity
-@Table(name = "hospital")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="hospital")
 @XmlType(propOrder= {"idname", "city", "patientlist"})
@@ -35,17 +34,12 @@ public class Hospital implements Serializable{
 	
 	private static final long serialVersionUID = 6161233776001447765L;
 	
-	@Id
-	@GeneratedValue(generator="hospital")
-	@TableGenerator(name="hospital", table="sqlite_sequence", 
-	pkColumnName="name", valueColumnName="seq", pkColumnValue= "hospital")
-	@XmlAttribute
+	
+	@XmlElement
 	private String idname;
-	@XmlAttribute
+	@XmlElement
 	private String city;
-	@OneToMany(mappedBy="hospital")
-	@XmlElement(name="")
-	@XmlElementWrapper(name="")
+	@XmlElement(name="hospital")
 	private List<Patient> patientlist;
 	private int userId;
 	

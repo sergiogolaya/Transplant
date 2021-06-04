@@ -33,81 +33,22 @@ public class Menu {
 
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	public static int imprimirMenuHospital() {
-		int opc = 0;
-		try {
-			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+	
 
-			System.out.print("\n\nWELCOME TO SECOND LIFE\n\n");
-			System.out.print("\nIntroduce an option\n");
-			System.out.print("\n1.Add request");
-			System.out.print("\n2.Check request");
-
-			opc = Integer.parseInt(console.readLine());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return opc;
-
-	}
-
-	void imprimirMenuDP() {
-		System.out.print("\n\nWELCOME TO SECOND LIFE\n\n");
-		System.out.print("\n1.Check Request");
-		System.out.print("\n3.Exit");
-
-	}
-
-	public static int imprimeMenu1Hospital() {
-		// ADD REQUEST
-		int option = 0;
-		System.out.print("\nADD SECTION");
-		System.out.print("\n1.Add patient");
-		System.out.print("\n2.Add donor");
-		System.out.print("\n3.Exit");
-		System.out.print("\nIntroduce an option\n");
-		try {
-			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-			option = Integer.parseInt(console.readLine());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
-		return option;
-
-	}
-
-	public static int imprimeMenu2Hospital() {
-		// CHECK REQUEST
-		int option = 0;
-		System.out.print("\nCHECK REQUEST SECTION");
-		System.out.print("\n1.Delete request");
-		System.out.print("\n2.Modify request");
-		System.out.print("\n3.Exit");
-		System.out.print("\nIntroduce an option\n");
-		try {
-			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-			option = Integer.parseInt(console.readLine());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-
-		}
-		return option;
-
-	}
-
-	public static void main(String[] args) throws Exception {
+	
+	public static void main(String[] args) throws Exception  {
 		dbman.connect();
 		userman.connect();
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
-		int option = Integer.parseInt(console.readLine());
-
-		System.out.println("1.Register");
-		System.out.println("2. Log in");
-		System.out.println("3. Exit");
+		int option = 0;
+		String aux;
+		System.out.print("\n\n         WELCOME TO SECOND LIFE\n\n");
+		System.out.println("\n1.Register");
+		System.out.println("\n2. Log in");
+		System.out.println("\n3. Exit");
+		System.out.println("\nIntroduce your option: ");
+		aux=console.readLine();
+		option=Integer.parseInt(aux);
 		switch (option) {
 		case 1:
 			register();
@@ -123,19 +64,6 @@ public class Menu {
 			break;
 
 		}
-
-		// HOSPITAL MENU
-		/*
-		 * //modifyPatientAge(); // addPatient(); // addDonor(); // addHospital(); //
-		 * addDonation(); // addMedicalHistory(); // addRequest(); // searchDonor(); //
-		 * dbman.printRequests(); //deleteRequest(); int opc = imprimirMenuHospital();
-		 * 
-		 * switch (opc) { case 1: int opc2 = imprimeMenu1Hospital(); if (opc2 == 1)
-		 * addPatient(); else if (opc2 == 2) addDonor(); else if (opc2 == 3) ;//
-		 * Exit(0); break; case 2: int opc3 = imprimeMenu2Hospital(); if (opc3 == 1) ;//
-		 * remove requests else if (opc3 == 2) ;// modify r else if (opc3 == 3) ;// exit
-		 * break; }
-		 */
 
 	}
 
@@ -158,7 +86,7 @@ public class Menu {
 		}
 	}
 
-	private static void logIn() throws IOException {
+	private static void logIn() throws Exception {
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Please, introduce your email: ");
 		String email = console.readLine();
@@ -179,21 +107,90 @@ public class Menu {
 
 	}
 
-	private static void hospitalMenu(User u) {
+	private static void hospitalMenu(User u) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("Choose an option: ");
+		int option = 0;
+		System.out.println("\nChoose an option: ");
+		System.out.print("\n1.Add patient");
+		System.out.print("\n2.Add donor");
+		System.out.print("\n3.Delete request");
+		System.out.print("\n3.Modify request");
+		System.out.print("\n5.Exit");
+		try {
+			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+			option = Integer.parseInt(console.readLine());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		}
+		switch (option) {
+		case 1:
+			addPatient();
+			break;
+
+		case 2:
+			addDonor();
+			break;
+
+		case 3:
+			deleteRequest();
+			break;
+
+		case 4:
+			modifyPatientAge();
+			break;
+
+		case 5:
+			break;
+		}
 
 	}
 
-	private static void donorMenu(User u) {
+	private static void donorMenu(User u) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("Choose an option: ");
+		int option = 0;
+		System.out.println("\nChoose an option: ");
+		System.out.println("\n1. Check your request");
+		System.out.println("\n2. Exit");
+		try {
+			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+			option = Integer.parseInt(console.readLine());
 
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		}
+		switch (option) {
+		case 1:
+			searchDonor();
+			break;
+		case 2:
+			break;
+		}
 	}
 
-	private static void patientMenu(User u) {
+	private static void patientMenu(User u) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("Choose an option: ");
+		int option=0;
+		System.out.println("\nChoose an option: ");
+		System.out.println("\n1. Check your request");
+		System.out.println("\n2. Exit");
+		try {
+			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+			option = Integer.parseInt(console.readLine());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		}
+		switch (option) {
+		case 1:
+			searchPatient();
+			break;
+		case 2:
+			break;
+		}
 
 	}
 
