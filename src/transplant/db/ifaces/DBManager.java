@@ -26,7 +26,7 @@ public interface DBManager {
 	public void modifyPatient(Integer id, Integer newAge);
 	public void deleteRequest(Integer patient_id, Integer donor_id);
 
-	//public List<Person> searchPersonByName(String name);
+	
 	
 	
 	

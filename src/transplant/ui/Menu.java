@@ -41,7 +41,7 @@ public class Menu {
 		userman.connect();
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int option = 0;
-		String aux;
+		
 		System.out.println("\n");
 		System.out.println("|--------------------------------------------|");
 		System.out.println("|         WELCOME TO SECOND LIFE             |");
@@ -50,10 +50,15 @@ public class Menu {
 		System.out.println("|2.Log in                                    |");
 		System.out.println("|3.Exit                                      |");
 		System.out.println("|--------------------------------------------|");
+<<<<<<< HEAD
 		
 		System.out.println("\n\nPlease, introduce an option: ");
 		
 		aux=console.readLine();
+=======
+		System.out.println("\n\nPlease introduce an option: ");
+		String aux=console.readLine();
+>>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant
 		option=Integer.parseInt(aux);
 		switch (option) {
 		case 1:
