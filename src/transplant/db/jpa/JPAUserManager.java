@@ -82,5 +82,25 @@ public class JPAUserManager implements UserManager {
 		}
 		return null;
 	}
-
+	@Override
+	public Boolean checkEmail(String email) {
+		try {
+			Query x = em.createNativeQuery("SELECT * FROM users WHERE email = ?", User.class);
+			x.setParameter(1, email);
+			User temp = (User)x.getSingleResult();
+			if(temp.getEmail().equalsIgnoreCase(email)) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch(NoResultException ne) {
+			return false;
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+ 
+ 
 }

@@ -74,34 +74,43 @@ public class Menu {
 	}
 
 	private static void register() throws NumberFormatException, IOException, NoSuchAlgorithmException {
-		// TODO Auto-generated method stub
+		
 		System.out.println("Specify your profile: 1.Patient  2. Donor   3. Hospital");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int profile = Integer.parseInt(console.readLine());
 
 		switch (profile) {
 		case 1:
-			registerPatient();
+			if(!registerPatient()) System.out.println("\nThe email is not available");
 			break;
 		case 2:
-			registerDonor();
+			if(!registerDonor())System.out.println("\nThe email is not available");
 			break;
 		case 3:
-			registerHospital();
+			if(!registerHospital()) System.out.println("\nThe email is not available");
 			break;
 		}
 	}
 
 	private static void logIn() throws Exception {
+		try {
+		
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+		
 		System.out.println("Please, introduce your email: ");
 		String email = console.readLine();
 		System.out.println("Please, introduce your password: ");
 		String password = console.readLine();
+		if(userman.checkEmail(email)) {
+			System.out.println("\nThis email is already used ") ;
+		
+		}
+		
 		User u = userman.checkPassword(email, password);
-		if (u == null) {
-			System.out.println("Wrong email or password");
-		} else if (u.getRole().getName().equalsIgnoreCase("patient")) {
+		
+			
+			
+		if (u.getRole().getName().equalsIgnoreCase("patient")) {
 			patientMenu(u);
 		}
 
@@ -110,8 +119,13 @@ public class Menu {
 		} else if (u.getRole().getName().equalsIgnoreCase("hospital")) {
 			hospitalMenu(u);
 		}
+		}
+		catch(Exception e) {
+			System.out.println("\nIncorrect data input");
+			
+		}
 
-	}
+}
 
 	private static void hospitalMenu(User u) throws Exception {
 		// TODO Auto-generated method stub
@@ -211,28 +225,38 @@ public class Menu {
 
 	}
 
-	private static void registerPatient() throws IOException, NoSuchAlgorithmException {
+	private static Boolean registerPatient() {
+		try {
 		System.out.println("Please, choose an email: ");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		String email = console.readLine();
 		System.out.println("Please, choose a password: ");
 		String password = console.readLine();
+		if(userman.checkEmail(email))return false;
 		Role role = userman.getRole(2);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
 		byte[] hash = md.digest();
+		
 		User u = new User(email, hash, role);
 		userman.newUser(u);
 		addPatientU(u.getId());
-
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+return true;
 	}
 
-	private static void registerDonor() throws IOException, NoSuchAlgorithmException {
+	private static Boolean registerDonor() {
+		
+		try{
 		System.out.println("Please, choose an email: ");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		String email = console.readLine();
 		System.out.println("Please, choose a password: ");
 		String password = console.readLine();
+		if(userman.checkEmail(email))return false;
 		Role role = userman.getRole(3);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
@@ -240,15 +264,20 @@ public class Menu {
 		User u = new User(email, hash, role);
 		userman.newUser(u);
 		addDonorU(u.getId());
-
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 
-	private static void registerHospital() throws IOException, NoSuchAlgorithmException {
+	private static Boolean registerHospital() {
+		try {
 		System.out.println("Please, choose an email: ");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		String email = console.readLine();
 		System.out.println("Please, choose a password: ");
 		String password = console.readLine();
+		if(userman.checkEmail(email))return false;
 		Role role = userman.getRole(1);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
@@ -256,6 +285,10 @@ public class Menu {
 		User u = new User(email, hash, role);
 		userman.newUser(u);
 		addHospitalU(u.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return true;
 
 	}
 
@@ -375,26 +408,7 @@ public class Menu {
 		Hospital h = new Hospital(idname, city);
 		dbman.addHospital(h);
 	}
-	// dbman.connect();
-
-	// addPatient();
-	/*
-	 * addDonor(); addHospital(); addDonation(); addMedicalHistory(); addRequest();
-	 * searchDonor();
-	 */
-
-	// modifyPatientAge();
-
-	// addPatient();
-	// addDonor();
-	// addHospital();
-	// addDonation();
-	// addMedicalHistory();
-	// addRequest();
-	// searchDonor();
-	// dbman.printRequests();
-	// deleteRequest();
-	// dbman.disconnect();
+	
 
 	private static void addDonation() throws Exception {
 		System.out.println("Please, input the donation info:");
