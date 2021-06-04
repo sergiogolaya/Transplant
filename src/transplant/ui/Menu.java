@@ -42,7 +42,7 @@ public class Menu {
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int option = 0;
 		String aux;
-		System.out.print("\n\n         WELCOME TO SECOND LIFE\n\n");
+		System.out.println("\n\n         WELCOME TO SECOND LIFE\n\n");
 		System.out.println("\n1.Register");
 		System.out.println("\n2. Log in");
 		System.out.println("\n3. Exit");
