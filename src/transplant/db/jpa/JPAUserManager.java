@@ -14,12 +14,12 @@ import transplant.db.pojos.users.Role;
 import transplant.db.pojos.users.User;
 
 public class JPAUserManager implements UserManager {
-
+//because is going to be used by a lot of methods
 	private EntityManager em;
 
 	@Override
 	public void connect() {
-		
+		//we create an entity manager like the user-provide type
 		em = Persistence.createEntityManagerFactory("user-provider").createEntityManager();
 		em.getTransaction().begin();
 		em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
@@ -76,9 +76,9 @@ public class JPAUserManager implements UserManager {
 			q.setParameter(2, hash);
 			return (User) q.getSingleResult();
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			e.printStackTrace();//never going to happen
 		} catch (NoResultException nre) {
-			return null;
+			return null;//it doesn't exits
 		}
 		return null;
 	}

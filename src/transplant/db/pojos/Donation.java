@@ -39,7 +39,8 @@ public class Donation implements Serializable {
 	private String name;
 	@XmlElement
 	private String type;
-	@XmlElement(name="donation")
+	@XmlElement(name = "donation")
+	@XmlElementWrapper(name="donationlist")
 	private List<Donation> donationlist;
 	
 	public Donation(Integer id, String name, String type) {

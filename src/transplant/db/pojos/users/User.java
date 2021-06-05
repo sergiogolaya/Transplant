@@ -23,7 +23,7 @@ public class User implements Serializable {
 	private String email;
 	@Lob
 	private byte[] password;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)//EAGER SO THAT WHEN WE acces the data base for a user every time is going to give you the role with the user
 	@JoinColumn(name="role_id")
 	private Role role;
 	

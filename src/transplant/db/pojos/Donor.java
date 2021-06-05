@@ -38,7 +38,8 @@ public class Donor implements Serializable {
 	private Integer donation_id;
 	@XmlElement
 	private Integer mh_id;
-	@XmlElement(name = "donor")
+	@XmlElement(name = "patient")
+	@XmlElementWrapper(name="patienlist")
 	private List<Patient> patientlist;
 	private Integer userId;
 

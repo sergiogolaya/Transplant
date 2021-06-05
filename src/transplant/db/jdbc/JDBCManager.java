@@ -64,7 +64,7 @@ public class JDBCManager implements DBManager {
 			stm3.close();
 			
 			Statement stm4=c.createStatement();
-			String sql4 = "CREATE TABLE donation " + "(type TEXT NOT NULL," + "name TEXT NOT NULL)";
+			String sql4 = "CREATE TABLE donation " + "(id INTEGER PRIMARY KEY UNIQUE ," + "type TEXT NOT NULL," + "name TEXT NOT NULL)";
 			stm4.executeUpdate(sql4);
 			stm4.close();
 			
@@ -83,14 +83,7 @@ public class JDBCManager implements DBManager {
 			stm6.close();
 
 		} catch (SQLException e) {
-<<<<<<< HEAD
-			
-			}
-
-=======
-			// TODO Auto-generated catch block
 			e.printStackTrace();
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
 		}
 
 	}
@@ -294,18 +287,14 @@ public class JDBCManager implements DBManager {
 		}
 
 	}
-<<<<<<< HEAD
-@Override
-	public void deleteRequest(Integer patient_id, Integer donor_id) {
-		
-=======
+
 
 	@Override
 	public void deleteRequest(Integer patient_id, Integer donor_id) {
 
 		String sql = "DELETE FROM request WHERE patient_id = ? AND donor_id = ?";
 		PreparedStatement prep;
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
+
 		try {
 			prep = c.prepareStatement(sql);
 			prep.setInt(1, patient_id);
@@ -379,12 +368,11 @@ public class JDBCManager implements DBManager {
 
 	}
 
-<<<<<<< HEAD
+
 	
 	
 	
 	
 	
-=======
->>>>>>> branch 'master' of https://github.com/sergiogolaya/Transplant.git
+
 }

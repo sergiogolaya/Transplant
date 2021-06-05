@@ -35,7 +35,7 @@ public class Hospital implements Serializable{
 	private static final long serialVersionUID = 6161233776001447765L;
 	
 	
-	@XmlElement
+	@XmlAttribute
 	private String idname;
 	@XmlElement
 	private String city;

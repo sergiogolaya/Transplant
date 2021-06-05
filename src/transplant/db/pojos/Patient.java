@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -26,14 +27,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "patient")
-@XmlType(propOrder = { "name","gender", "age", "donation_id", "mh_id", "h_id" })
+@XmlType(propOrder = { "name","gender", "age", "donation_id", "mh_id", "h_id" ,"donorlist","donationlist"})
 
 public class Patient implements Serializable {
 	private static final long serialVersionUID = 3915252998504410580L;
 
 	@XmlAttribute
 	private Integer id;
-	@XmlElement
+	@XmlAttribute
 	private String name;
 	@XmlElement
 	private String gender;
@@ -45,11 +46,15 @@ public class Patient implements Serializable {
 	private Integer mh_id;
 	@XmlElement
 	private String h_id;
-	@XmlElement(name = "patient")
-	@XmlAttribute
+	
+	@XmlElement(name = "donor")
+	@XmlElementWrapper(name="donorlist")
 	private List<Donor> donorlist;
-	@XmlElement
+	
+	@XmlElement(name="Donation")
+	@XmlElementWrapper(name="donationlist")
 	private List<Donation> donationlist;
+	
 	private Integer userId;
 
 	public Patient() {

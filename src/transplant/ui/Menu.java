@@ -39,40 +39,44 @@ public class Menu {
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int option = 0;
 
-		System.out.println("\n");
-		System.out.println("|--------------------------------------------|");
-		System.out.println("|         WELCOME TO SECOND LIFE             |");
-		System.out.println("|--------------------------------------------|");
-		System.out.println("|1.Register                                  |");
-		System.out.println("|2.Log in                                    |");
-		System.out.println("|3.Exit                                      |");
-		System.out.println("|--------------------------------------------|");
+		do {
+			System.out.println("\n");
+			System.out.println("|--------------------------------------------|");
+			System.out.println("|         WELCOME TO SECOND LIFE             |");
+			System.out.println("|--------------------------------------------|");
+			System.out.println("|1.Register                                  |");
+			System.out.println("|2.Log in                                    |");
+			System.out.println("|3.Exit                                      |");
+			System.out.println("|--------------------------------------------|");
 
-		System.out.println("\n\nPlease introduce an option: ");
-		String aux=console.readLine();
-		option=Integer.parseInt(aux);
-		switch (option) {
-		case 1:
-			register();
-			break;
-		case 2:
-			logIn();
-			break;
-		case 3:
-			dbman.disconnect();
-			userman.disconnect();
-			System.exit(0);
-		default:
-			break;
+			System.out.println("\n\nPlease introduce an option: ");
+			String aux = console.readLine();
+			option = Integer.parseInt(aux);
+			switch (option) {
+			case 1:
+				register();
+				break;
+			case 2:
+				logIn();
+				break;
+			case 3:
+				dbman.disconnect();
+				userman.disconnect();
+				System.out.println("Bye!");
+				System.exit(0);
+			default:
+				break;
 
-		}
+			}
+		} while (option != 3);
 
 	}
 
 	private static void register() throws NumberFormatException, IOException, NoSuchAlgorithmException {
 
+//ask for an email and a password 
+//list the roles and ask for one of it
 
-		System.out.println("Specify your profile: 1.Patient  2. Donor   3. Hospital");
 		System.out.println("|-------------------------|");
 		System.out.println("|  Profile Specification  |");
 		System.out.println("|-------------------------|");
@@ -101,7 +105,7 @@ public class Menu {
 		}
 	}
 
-	private static void logIn(){
+	private static void logIn() {
 		try {
 
 			BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
@@ -110,11 +114,8 @@ public class Menu {
 			String email = console.readLine();
 			System.out.println("Please, introduce your password: ");
 			String password = console.readLine();
-			if (userman.checkEmail(email)) {
-				System.out.println("\nThis email is already used ");
-
-			}
-
+		
+			
 			User u = userman.checkPassword(email, password);
 
 			if (u.getRole().getName().equalsIgnoreCase("patient")) {
@@ -137,14 +138,19 @@ public class Menu {
 		int option = 0;
 
 		System.out.println("\n");
-		System.out.println("|-------------------------|");
-		System.out.println("|1.Add patient            |");
-		System.out.println("|2.Add donor              |");
-		System.out.println("|3.Delete request         |");
-		System.out.println("|4.Modify patient age     |");
-		System.out.println("|5.Modify donor age       |");
-		System.out.println("|6.Exit                   |");
-		System.out.println("|-------------------------|");
+		System.out.println("|--------------------------------------|");
+		System.out.println("|1.Add patient                         |");
+		System.out.println("|2.Add donor                           |");
+		System.out.println("|3.Add donation                        |");
+		System.out.println("|4.Add request                         |");
+		System.out.println("|5.Add medical history                 |");
+		System.out.println("|6.Delete request                      |");
+		System.out.println("|7.Modify patient age                  |");
+		System.out.println("|8.Modify donor age                    |");
+		System.out.println("|9.Show the patient´s information      |");
+		System.out.println("|10.Show the donor´s information       |");
+		System.out.println("|11.Exit                               |");
+		System.out.println("|--------------------------------------|");
 
 		System.out.println("\n\nPlease, introduce an option: ");
 
@@ -164,23 +170,48 @@ public class Menu {
 		case 2:
 			addDonor();
 			break;
-
 		case 3:
+			addDonation();
+			break;
+			
+		case 4:
+			addRequest();
+			break;
+		case 5:
+			addMedicalHistory();
+			break;
+
+		case 6:
 			deleteRequest();
 			break;
 
-		case 4:
+		case 7:
 			modifyPatientAge();
-			
+
 			break;
-			
-		case 5:
+
+		case 8:
+
 			modifyDonorAge();
+
 			break;
+
+		case 9:
+
+			searchPatient();
+
+			break;
+
+		case 10:
+
+			searchDonor();
+
+			break;
+
+		case 11:
 			
-		case 6:
-			System.exit(0);
-			break;
+			return;
+
 		}
 
 	}
@@ -208,7 +239,7 @@ public class Menu {
 			searchDonor();
 			break;
 		case 2:
-			break;
+			return;
 		}
 	}
 
@@ -234,7 +265,7 @@ public class Menu {
 			searchPatient();
 			break;
 		case 2:
-			break;
+			return;
 		}
 
 	}
@@ -308,131 +339,158 @@ public class Menu {
 
 	}
 
-	private static void addPatientU(Integer userId) throws IOException {
-		String aux;
-		System.out.println("Please, input the patient info:");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Patient name: ");
-		String patientname = reader.readLine();
-		System.out.print("Gender: ");
-		String patientgender = reader.readLine();
-		System.out.print("Age: ");
-		aux = reader.readLine();
-		Integer patientage = Integer.parseInt(aux);
-		System.out.print("Donation id: ");
-		aux = reader.readLine();
-		Integer donation_id = Integer.parseInt(aux);
-		System.out.print("Medical History id: ");
-		aux = reader.readLine();
-		Integer medical_history = Integer.parseInt(aux);
-		System.out.print("Hospital id: ");
-		String hospital_id = reader.readLine();
-		Patient p = new Patient(patientname, patientgender, patientage, donation_id, medical_history, hospital_id,
-				userId);
-		dbman.addPatient(p);
+	private static void addPatientU(Integer userId) {
+		try {
+			String aux;
+			System.out.println("Please, input the patient info:");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("Patient name: ");
+			String patientname = reader.readLine();
+			System.out.print("Gender: ");
+			String patientgender = reader.readLine();
+			System.out.print("Age: ");
+			aux = reader.readLine();
+			Integer patientage = Integer.parseInt(aux);
+			System.out.print("Donation id: ");
+			aux = reader.readLine();
+			Integer donation_id = Integer.parseInt(aux);
+			System.out.print("Medical History id: ");
+			aux = reader.readLine();
+			Integer medical_history = Integer.parseInt(aux);
+			System.out.print("Hospital id: ");
+			String hospital_id = reader.readLine();
+			Patient p = new Patient(patientname, patientgender, patientage, donation_id, medical_history, hospital_id,
+					userId);
+			dbman.addPatient(p);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
-	private static void addPatient() throws Exception {
-
-		String aux;
-		System.out.println("Please, input the patient info:");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Patient name: ");
-		String patientname = reader.readLine();
-		System.out.print("Gender: ");
-		String patientgender = reader.readLine();
-		System.out.print("Age: ");
-		aux = reader.readLine();
-		Integer patientage = Integer.parseInt(aux);
-		System.out.print("Donation id: ");
-		aux = reader.readLine();
-		Integer donation_id = Integer.parseInt(aux);
-		System.out.print("Medical History id: ");
-		aux = reader.readLine();
-		Integer medical_history = Integer.parseInt(aux);
-		System.out.print("Hospital id: ");
-		String hospital_id = reader.readLine();
-		Patient p = new Patient(patientname, patientgender, patientage, donation_id, medical_history, hospital_id);
-		dbman.addPatient(p);
+	private static void addPatient() {
+		try {
+			String aux;
+			System.out.println("Please, input the patient info:");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("Patient name: ");
+			String patientname = reader.readLine();
+			System.out.print("Gender: ");
+			String patientgender = reader.readLine();
+			System.out.print("Age: ");
+			aux = reader.readLine();
+			Integer patientage = Integer.parseInt(aux);
+			System.out.print("Donation id: ");
+			aux = reader.readLine();
+			Integer donation_id = Integer.parseInt(aux);
+			System.out.print("Medical History id: ");
+			aux = reader.readLine();
+			Integer medical_history = Integer.parseInt(aux);
+			System.out.print("Hospital id: ");
+			String hospital_id = reader.readLine();
+			Patient p = new Patient(patientname, patientgender, patientage, donation_id, medical_history, hospital_id);
+			dbman.addPatient(p);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	private static void addDonorU(Integer userId) throws IOException {
-		String aux;
-		System.out.println("Please, input the donor info:");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Donor name: ");
-		String donorname = reader.readLine();
-		System.out.print("Gender: ");
-		String donorgender = reader.readLine();
-		System.out.print("Age: ");
-		aux = reader.readLine();
-		Integer donorage = Integer.parseInt(aux);
-		System.out.print("Donation id: ");
-		aux = reader.readLine();
-		Integer donation_id = Integer.parseInt(aux);
-		System.out.print("Medical History id: ");
-		aux = reader.readLine();
-		Integer medical_history = Integer.parseInt(aux);
-		Donor d = new Donor(donorname, donorgender, donorage, donation_id, medical_history, userId);
-		dbman.addDonor(d);
-
-	}
-
-	private static void addDonor() throws Exception {
-		String aux;
-		System.out.println("Please, input the donor info:");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Donor name: ");
-		String donorname = reader.readLine();
-		System.out.print("Gender: ");
-		String donorgender = reader.readLine();
-		System.out.print("Age: ");
-		aux = reader.readLine();
-		Integer donorage = Integer.parseInt(aux);
-		System.out.print("Donation id: ");
-		aux = reader.readLine();
-		Integer donation_id = Integer.parseInt(aux);
-		System.out.print("Medical History id: ");
-		aux = reader.readLine();
-		Integer medical_history = Integer.parseInt(aux);
-		Donor d = new Donor(donorname, donorgender, donorage, donation_id, medical_history);
-		dbman.addDonor(d);
+	private static void addDonorU(Integer userId) {
+		try {
+			String aux;
+			System.out.println("Please, input the donor info:");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("Donor name: ");
+			String donorname = reader.readLine();
+			System.out.print("Gender: ");
+			String donorgender = reader.readLine();
+			System.out.print("Age: ");
+			aux = reader.readLine();
+			Integer donorage = Integer.parseInt(aux);
+			System.out.print("Donation id: ");
+			aux = reader.readLine();
+			Integer donation_id = Integer.parseInt(aux);
+			System.out.print("Medical History id: ");
+			aux = reader.readLine();
+			Integer medical_history = Integer.parseInt(aux);
+			Donor d = new Donor(donorname, donorgender, donorage, donation_id, medical_history, userId);
+			dbman.addDonor(d);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
-	private static void addHospitalU(Integer userId) throws IOException {
-		System.out.println("Please, input the hospital info:");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("Hospital name: ");
-		String hospitalname = reader.readLine();
-		System.out.print("City: ");
-		String city = reader.readLine();
-		Hospital h = new Hospital(hospitalname, city, userId);
-		dbman.addHospital(h);
+	private static void addDonor() {
+		try {
+			String aux;
+			System.out.println("Please, input the donor info:");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("Donor name: ");
+			String donorname = reader.readLine();
+			System.out.print("Gender: ");
+			String donorgender = reader.readLine();
+			System.out.print("Age: ");
+			aux = reader.readLine();
+			Integer donorage = Integer.parseInt(aux);
+			System.out.print("Donation id: ");
+			aux = reader.readLine();
+			Integer donation_id = Integer.parseInt(aux);
+			System.out.print("Medical History id: ");
+			aux = reader.readLine();
+			Integer medical_history = Integer.parseInt(aux);
+			Donor d = new Donor(donorname, donorgender, donorage, donation_id, medical_history);
+			dbman.addDonor(d);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
-	private static void addHospital() throws Exception {
-		System.out.println("Please, input the hospital info:");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("id name: ");
-		String idname = reader.readLine();
-		System.out.print("city: ");
-		String city = reader.readLine();
-		Hospital h = new Hospital(idname, city);
-		dbman.addHospital(h);
+	private static void addHospitalU(Integer userId) {
+		try {
+			System.out.println("Please, input the hospital info:");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("Hospital name: ");
+			String hospitalname = reader.readLine();
+			System.out.print("City: ");
+			String city = reader.readLine();
+			Hospital h = new Hospital(hospitalname, city, userId);
+			dbman.addHospital(h);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
-	
-	private static void addDonation() throws Exception {
-		System.out.println("Please, input the donation info:");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.print("type: ");
-		String type = reader.readLine();
-		System.out.print("name: ");
-		String name = reader.readLine();
-		Donation don = new Donation(name, type);
-		dbman.addDonation(don);
+
+	private static void addHospital() {
+		try {
+			System.out.println("Please, input the hospital info:");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("id name: ");
+			String idname = reader.readLine();
+			System.out.print("city: ");
+			String city = reader.readLine();
+			Hospital h = new Hospital(idname, city);
+			dbman.addHospital(h);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void addDonation() {
+		try {
+			System.out.println("Please, input the donation info:");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("type: ");
+			String type = reader.readLine();
+			System.out.print("name: ");
+			String name = reader.readLine();
+			Donation don = new Donation(name, type);
+			dbman.addDonation(don);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -467,20 +525,19 @@ public class Menu {
 		dbman.addRequest(r);
 	}
 
-	private static void deleteRequest()  {
+	private static void deleteRequest() {
 		try {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		dbman.printRequests();
-		System.out.println("Please, input the patient's id:");
-		String aux = reader.readLine();
-		Integer p_id = Integer.parseInt(aux);
-		System.out.println("Please, input the donor's id:");
-		aux = reader.readLine();
-		Integer d_id = Integer.parseInt(aux);
-		dbman.deleteRequest(p_id, d_id);
-		System.out.println("The request has been deleted");
-		}
-		catch (Exception e) {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			dbman.printRequests();
+			System.out.println("Please, input the patient's id:");
+			String aux = reader.readLine();
+			Integer p_id = Integer.parseInt(aux);
+			System.out.println("Please, input the donor's id:");
+			aux = reader.readLine();
+			Integer d_id = Integer.parseInt(aux);
+			dbman.deleteRequest(p_id, d_id);
+			System.out.println("The request has been deleted");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -524,6 +581,7 @@ public class Menu {
 		dbman.modifyPatient(id, newAge);
 		System.out.println("Update finished.");
 	}
+
 	private static void modifyDonorAge() throws Exception {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("Choose a donor, type its id: ");
