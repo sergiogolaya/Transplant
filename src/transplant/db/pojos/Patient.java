@@ -57,6 +57,14 @@ public class Patient implements Serializable {
 	
 	private Integer userId;
 
+	public List<Donor> getDonorlist() {
+		return donorlist;
+	}
+
+	public void setDonorlist(List<Donor> donorlist) {
+		this.donorlist = donorlist;
+	}
+
 	public Patient() {
 		super();
 		this.donorlist = new ArrayList<Donor>();

@@ -43,6 +43,16 @@ public class Donor implements Serializable {
 	@XmlElementWrapper(name="patienlist")
 	private List<Patient> patientlist;
 	private Integer userId;
+	
+	public List<Patient> getPatientlist() {
+		return patientlist;
+	}
+
+	public void setPatientlist(List<Patient> patientlist) {
+		this.patientlist = patientlist;
+	}
+
+
 
 	public Donor(List<Patient> patientlist) {
 		super();
