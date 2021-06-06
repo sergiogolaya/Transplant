@@ -23,7 +23,7 @@ public class Xml2JavaReport {
 	public static void main(String[] args) throws JAXBException {
 
 		// Create the JAXBContext
-		JAXBContext jaxbContext = JAXBContext.newInstance(Report.class);
+		JAXBContext jaxbContext = JAXBContext.newInstance(Donor.class);
 		// Get the unmarshaller
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
@@ -66,7 +66,7 @@ public class Xml2JavaReport {
 		// In a real world, we should check if they already exist
 		// and update them instead of inserting as new
 		for (Patient patient : pats) {
-			em.persist(pats);
+			em.persist(patient);
 		}
 		em.persist(d1);
 		
