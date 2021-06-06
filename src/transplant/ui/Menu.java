@@ -38,6 +38,7 @@ public class Menu {
 		userman.connect();
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		int option = 0;
+		try {
 
 		do {
 			System.out.println("\n");
@@ -69,6 +70,9 @@ public class Menu {
 
 			}
 		} while (option != 3);
+		}catch(Exception e) {
+			System.out.println("\nPlease, introduce an option!");
+		}
 
 	}
 
@@ -587,7 +591,7 @@ public class Menu {
 		System.out.println("Choose a donor, type its id: ");
 		dbman.printRequests();
 		Integer id = Integer.parseInt(reader.readLine());
-		System.out.print("Type the new age of the patient: ");
+		System.out.print("Type the new age of the donor: ");
 		String aux = reader.readLine();
 		Integer newAge = Integer.parseInt(aux);
 		dbman.modifyDonor(id, newAge);

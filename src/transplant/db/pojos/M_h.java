@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import transplant.xml.utils.SQLDateAdapter;
+
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -41,6 +43,7 @@ public class M_h implements Serializable{
 	    @XmlElement
 		private String actual_I;
 	    @XmlElement
+	    @XmlJavaTypeAdapter(SQLDateAdapter.class) 
 		private Date date;
 	    //@XmlElement(name = "MH")
 		

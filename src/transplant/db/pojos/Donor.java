@@ -17,15 +17,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
-
+//this line activates the xml anotations
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "donor")
+@XmlRootElement(name = "donor")//the first name that is going to agruop
 @XmlType(propOrder = { "name", "gender", "age", "donation_id", "mh_id", "patientlist" })
 
 public class Donor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+	//xmltransient the thing is not going to be stored in the xml doument
+	//xml element appears down an atribute goes in the same line
 	@XmlAttribute
 	private Integer id;
 	@XmlAttribute

@@ -39,8 +39,10 @@ public class Hospital implements Serializable{
 	private String idname;
 	@XmlElement
 	private String city;
-	@XmlElement(name="hospital")
+	@XmlElement(name="Patient")
+	@XmlElementWrapper(name="Patient list")
 	private List<Patient> patientlist;
+	@XmlElement
 	private int userId;
 	
 	
