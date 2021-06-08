@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import transplant.db.ifaces.DBManager;
 import transplant.db.pojos.Donation;
 import transplant.db.pojos.Donor;
@@ -366,6 +367,57 @@ public class JDBCManager implements DBManager {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public List<Patient> getAllPatXml() {
+		List<Patient> pats = new ArrayList<Patient>();
+		try {
+			String sql = "SELECT id, name, gender, age, organ_id, mh_id, h_id FROM patient WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, '%'+""+'%');
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				Integer pid = rs.getInt("id");
+				String pname = rs.getString("name");
+				String pgender = rs.getString("gender");
+				Integer page = rs.getInt("age");
+				Integer donation_id = rs.getInt("organ_id");
+				String h_id = rs.getString("h_id");
+				Integer mh_id = rs.getInt("mh_id");
+				Patient p = new Patient(pname, pgender, page, donation_id, mh_id, h_id);
+				pats.add(p);
+			}
+	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return pats;
+	}
+
+	@Override
+	public List<Donor> getAllDonXml() {
+		List<Donor> dons = new ArrayList<Donor>();
+		try {
+			String sql = "SELECT id, name, gender, age, organ_id, mh_id FROM donor WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, '%'+""+'%');
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				Integer did = rs.getInt("id");
+				String dname = rs.getString("name");
+				String dgender = rs.getString("gender");
+				Integer page = rs.getInt("age");
+				Integer donation_id = rs.getInt("organ_id");
+				Integer mh_id = rs.getInt("mh_id");
+				Donor d = new Donor(dname, dgender, page, donation_id, mh_id);
+				dons.add(d);
+			}
+	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return dons;
 	}
 
 

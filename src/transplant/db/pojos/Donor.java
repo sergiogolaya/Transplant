@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,7 @@ public class Donor implements Serializable {
 	@XmlElement(name = "patient")
 	@XmlElementWrapper(name="patienlist")
 	private List<Patient> patientlist;
+	@XmlTransient
 	private Integer userId;
 	
 	public List<Patient> getPatientlist() {
@@ -52,7 +54,10 @@ public class Donor implements Serializable {
 		this.patientlist = patientlist;
 	}
 
-
+	public Donor() {
+		super();
+		this.patientlist = new ArrayList<Patient>();
+	}
 
 	public Donor(List<Patient> patientlist) {
 		super();

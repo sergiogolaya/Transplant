@@ -26,11 +26,14 @@ import transplant.db.pojos.Patient;
 import transplant.db.pojos.Request;
 import transplant.db.pojos.users.Role;
 import transplant.db.pojos.users.User;
+import transplant.xml.Java2XmlReport;
+import transplant.xml.Xml2HtmlReport;
 
 public class Menu {
 	public static DBManager dbman = new JDBCManager();
 	private static UserManager userman = new JPAUserManager();
-
+	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	private static Java2XmlReport j = new Java2XmlReport();
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 	public static void main(String[] args) throws Exception {
@@ -153,7 +156,8 @@ public class Menu {
 		System.out.println("|8.Modify donor age                    |");
 		System.out.println("|9.Show the patient´s information      |");
 		System.out.println("|10.Show the donor´s information       |");
-		System.out.println("|11.Exit                               |");
+		System.out.println("|11.Create XML                         |");
+		System.out.println("|0.Exit                    			   |");
 		System.out.println("|--------------------------------------|");
 
 		System.out.println("\n\nPlease, introduce an option: ");
@@ -211,13 +215,22 @@ public class Menu {
 			searchDonor();
 
 			break;
-
-		case 11:
 			
+		case 11:
+			xml();
+			break;
+			
+		case 0:
 			return;
-
 		}
 
+	}
+	
+	private static void xml() throws Exception{
+		
+		j.getXMLDon();
+		j.getXMLPat();
+		
 	}
 
 	private static void donorMenu(User u) throws Exception {

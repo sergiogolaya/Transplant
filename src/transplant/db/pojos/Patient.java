@@ -55,6 +55,7 @@ public class Patient implements Serializable {
 	@XmlElementWrapper(name="donationlist")
 	private List<Donation> donationlist;
 	
+	@XmlTransient
 	private Integer userId;
 
 	public List<Donor> getDonorlist() {

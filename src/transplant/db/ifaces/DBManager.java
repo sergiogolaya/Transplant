@@ -26,6 +26,8 @@ public interface DBManager {
 	public void modifyPatient(Integer id, Integer newAge);
 	public void modifyDonor(Integer id, Integer newAge);
 	public void deleteRequest(Integer patient_id, Integer donor_id);
+	public List<Patient> getAllPatXml();
+	public List<Donor> getAllDonXml();
 
 	
 	

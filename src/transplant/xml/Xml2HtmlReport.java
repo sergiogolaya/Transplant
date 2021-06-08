@@ -24,9 +24,4 @@ public class Xml2HtmlReport {
 			e.printStackTrace();
 		}
 	}
-
-	public static void main(String[] args) {
-		simpleTransform("./xmls/External-Report.xml", "./xmls/Report-Style.xslt", "./xmls/External-Report.html");
-
-	}
 }

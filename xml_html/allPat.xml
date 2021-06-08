@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PatList>
+    <pats name="carlota">
+        <gender>female</gender>
+        <age>13</age>
+        <donation_id>1</donation_id>
+        <mh_id>3</mh_id>
+        <h_id>gregorio marañon</h_id>
+        <donorlist/>
+        <donationlist/>
+    </pats>
+    <pats name="lola">
+        <gender>female</gender>
+        <age>21</age>
+        <donation_id>1</donation_id>
+        <mh_id>9</mh_id>
+        <h_id>la paz</h_id>
+        <donorlist/>
+        <donationlist/>
+    </pats>
+    <pats name="pepa">
+        <gender>female</gender>
+        <age>12</age>
+        <donation_id>5</donation_id>
+        <mh_id>9</mh_id>
+        <h_id>gregorio</h_id>
+        <donorlist/>
+        <donationlist/>
+    </pats>
+</PatList>

@@ -49,6 +49,9 @@ public class Donation implements Serializable {
 		this.name = name;
 		this.type = type;
 	}
+	public Donation() {
+		super();
+	}
 
 	
 	public Donation(String name, String type) {

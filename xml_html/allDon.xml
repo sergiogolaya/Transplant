@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DonList>
+    <donors name="carmen">
+        <gender>male</gender>
+        <age>23</age>
+        <donation_id>2</donation_id>
+        <mh_id>3</mh_id>
+        <patienlist/>
+    </donors>
+    <donors name="pepa ">
+        <gender>female</gender>
+        <age>60</age>
+        <donation_id>5</donation_id>
+        <mh_id>9</mh_id>
+        <patienlist/>
+    </donors>
+    <donors name="teresa perez">
+        <gender>female</gender>
+        <age>21</age>
+        <donation_id>3</donation_id>
+        <mh_id>4</mh_id>
+        <patienlist/>
+    </donors>
+    <donors name="maria navarro ">
+        <gender>female</gender>
+        <age>34</age>
+        <donation_id>6</donation_id>
+        <mh_id>6</mh_id>
+        <patienlist/>
+    </donors>
+    <donors name="ximena ruiperez">
+        <gender>female</gender>
+        <age>45</age>
+        <donation_id>5</donation_id>
+        <mh_id>10</mh_id>
+        <patienlist/>
+    </donors>
+</DonList>
